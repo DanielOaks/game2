@@ -1,6 +1,6 @@
 [gd_scene load_steps=82 format=3 uid="uid://d2dxe6duwx2n4"]
 
-[ext_resource type="Script" path="res://scenes/Characters/Player2DS.gd" id="1_wb35k"]
+[ext_resource type="Script" path="res://scenes/characters/Player2DS.gd" id="1_wb35k"]
 [ext_resource type="Texture2D" uid="uid://b8homtiindmv3" path="res://assets/red-hood-character/idle sheet-Sheet.png" id="2_1gy65"]
 [ext_resource type="Shader" path="res://shaders/paletteSwap.gdshader" id="2_s2k6u"]
 [ext_resource type="Texture2D" uid="uid://nrar4seksyh0" path="res://assets/red-hood-character/itch jump sheet-Sheet.png" id="3_e7v68"]

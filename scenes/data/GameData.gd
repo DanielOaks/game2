@@ -6,6 +6,7 @@ const VIBES: Array[Vibe] = [
 	preload("res://assets/game2/vibes/red.tres"),
 	preload("res://assets/game2/vibes/cool.tres"),
 	preload("res://assets/game2/vibes/kawaii.tres"),
+	preload("res://assets/game2/vibes/warm_ice.tres"),
 ]
 
 var current_vibe_i: int = 0
