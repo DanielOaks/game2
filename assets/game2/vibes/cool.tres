@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="Vibe" load_steps=2 format=3 uid="uid://d8larpor2k15"]
+
+[ext_resource type="Script" path="res://assets/game2/vibes/Vibe.gd" id="1_cxiol"]
+
+[resource]
+script = ExtResource("1_cxiol")
+name = "Cool"

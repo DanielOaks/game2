@@ -30,13 +30,12 @@ func get_all_file_paths(path):
 # get random title image
 func new_title_image():
 	var image_paths = get_all_file_paths("res://images/title-images/")
-	var image = Image.load_from_file(image_paths.pick_random())
-	var texture = ImageTexture.create_from_image(image)
+	var texture = load(image_paths.pick_random())
 	
 	var title = get_node("MarginContainer/VBoxContainer/title") as TextureRect
 	title.texture = texture
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("secret_1"):
 		new_title_image()
 

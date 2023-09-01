@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="Vibe" load_steps=2 format=3 uid="uid://58pkivfuuib"]
+
+[ext_resource type="Script" path="res://assets/game2/vibes/Vibe.gd" id="1_cimby"]
+
+[resource]
+script = ExtResource("1_cimby")
+name = "Red"
