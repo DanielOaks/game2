@@ -9,6 +9,7 @@ extends CharacterBody2D
 @export var FRAMES_TO_ALLOW_JUMPING_AFTER_LEAVING_LEDGE: int = 10
 
 @onready var animated_sprite : AnimatedSprite2D = $AnimatedSprite2D
+@onready var game_data: GameData = get_node("/root/GameData")
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -19,6 +20,9 @@ var was_in_air : bool = false
 var was_on_wall : bool = false
 var moving_into_wall : bool = false
 var can_still_jump : int = 0
+
+func _process(_delta):
+	animated_sprite.material.set_shader_parameter("paletteNumber", game_data.current_vibe_i)
 
 func _physics_process(delta):
 	direction = Input.get_vector("left", "right", "up", "down")
@@ -60,7 +64,8 @@ func _physics_process(delta):
 		if is_on_floor() or can_still_jump > 0:
 			velocity.y = JUMP_VELOCITY
 			animated_sprite.play("jump_start")
-			animation_locked = true
+			if not is_on_wall():
+				animation_locked = true
 			can_still_jump = 0
 		elif is_on_wall():
 			has_double_jumped = false

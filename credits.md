@@ -11,6 +11,3 @@
 
 - https://legnops.itch.io/red-hood-character/
 - https://opengameart.org/content/generic-platformer-tiles
-- 
-
-- https://pigdev.itch.io/godot-sandbox

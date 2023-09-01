@@ -1,5 +1,7 @@
 extends Control
 
+@onready var game_data: GameData = get_node("/root/GameData")
+
 func _on_play_pressed():
 	get_tree().change_scene_to_file("res://scenes/ExampleSideScroll.tscn")
 

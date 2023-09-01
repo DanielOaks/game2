@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://knk7nvdpus7o"]
+[gd_scene load_steps=6 format=3 uid="uid://knk7nvdpus7o"]
 
 [ext_resource type="Texture2D" uid="uid://1vmpowkruim6" path="res://assets/generic-platformer-tiles/generic_platformer_tiles.png" id="1_dgetb"]
 [ext_resource type="PackedScene" uid="uid://d2dxe6duwx2n4" path="res://scenes/Characters/Player2DS.tscn" id="2_gnkco"]
+[ext_resource type="Script" path="res://scenes/VibeShower.gd" id="3_8o3gp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sxxq5"]
 texture = ExtResource("1_dgetb")
@@ -1271,3 +1272,11 @@ position_smoothing_enabled = true
 position_smoothing_speed = 13.0
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
+
+[node name="VibeShower" type="Label" parent="Camera2D"]
+offset_left = -92.0
+offset_top = -47.0
+offset_right = -52.0
+offset_bottom = -21.0
+text = "Vibe:"
+script = ExtResource("3_8o3gp")

@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="Vibe" load_steps=2 format=3 uid="uid://djjyuvbqjb3ls"]
+
+[ext_resource type="Script" path="res://assets/game2/vibes/Vibe.gd" id="1_dn5jc"]
+
+[resource]
+script = ExtResource("1_dn5jc")
+name = "Kawaii"
