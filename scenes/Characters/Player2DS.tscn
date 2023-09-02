@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=3 uid="uid://d2dxe6duwx2n4"]
+[gd_scene load_steps=87 format=3 uid="uid://d2dxe6duwx2n4"]
 
 [ext_resource type="Script" path="res://scenes/characters/Player2DS.gd" id="1_wb35k"]
 [ext_resource type="Texture2D" uid="uid://b8homtiindmv3" path="res://assets/red-hood-character/idle sheet-Sheet.png" id="2_1gy65"]
@@ -13,7 +13,6 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="11_aw8ao"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="12_ros3m"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="13_ghek8"]
-[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="14_35pgw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5wn7y"]
 shader = ExtResource("2_s2k6u")
@@ -586,36 +585,100 @@ script = ExtResource("9_p0ap0")
 [node name="ParallelState" type="Node" parent="StateChart"]
 script = ExtResource("10_kxvje")
 
-[node name="FacingDirection" type="Node" parent="StateChart/ParallelState"]
+[node name="MoveState" type="Node" parent="StateChart/ParallelState"]
 script = ExtResource("11_aw8ao")
-initial_state = NodePath("Right")
+initial_state = NodePath("OnFloor")
 
-[node name="Left" type="Node" parent="StateChart/ParallelState/FacingDirection"]
+[node name="OnFloor" type="Node" parent="StateChart/ParallelState/MoveState"]
 script = ExtResource("12_ros3m")
 
-[node name="Face Right" type="Node" parent="StateChart/ParallelState/FacingDirection/Left"]
+[node name="Fall" type="Node" parent="StateChart/ParallelState/MoveState/OnFloor"]
 script = ExtResource("13_ghek8")
-to = NodePath("../../Right")
-event = &"face_right"
+to = NodePath("../../Fell")
+event = &"left_floor"
+delay_seconds = 0.15
 
-[node name="Right" type="Node" parent="StateChart/ParallelState/FacingDirection"]
+[node name="Jump" type="Node" parent="StateChart/ParallelState/MoveState/OnFloor"]
+script = ExtResource("13_ghek8")
+to = NodePath("../../Jumped")
+event = &"jump_pressed"
+
+[node name="Jumped" type="Node" parent="StateChart/ParallelState/MoveState"]
 script = ExtResource("12_ros3m")
 
-[node name="Face Left" type="Node" parent="StateChart/ParallelState/FacingDirection/Right"]
+[node name="Land" type="Node" parent="StateChart/ParallelState/MoveState/Jumped"]
 script = ExtResource("13_ghek8")
-to = NodePath("../../Left")
-event = &"face_left"
+to = NodePath("../../OnFloor")
+event = &"on_floor"
 
-[node name="StateChartDebugger" parent="." instance=ExtResource("14_35pgw")]
-visible = false
-offset_left = 17.0
-offset_top = -66.0
-offset_right = 494.0
-offset_bottom = 284.0
-scale = Vector2(0.3, 0.3)
-initial_node_to_watch = NodePath("../StateChart")
+[node name="Touched Wall" type="Node" parent="StateChart/ParallelState/MoveState/Jumped"]
+script = ExtResource("13_ghek8")
+to = NodePath("../../OnWall")
+event = &"on_wall"
+
+[node name="Double Jumped" type="Node" parent="StateChart/ParallelState/MoveState/Jumped"]
+script = ExtResource("13_ghek8")
+to = NodePath("../../Double Jumped")
+event = &"jump_pressed"
+
+[node name="Double Jumped" type="Node" parent="StateChart/ParallelState/MoveState"]
+script = ExtResource("12_ros3m")
+
+[node name="Land" type="Node" parent="StateChart/ParallelState/MoveState/Double Jumped"]
+script = ExtResource("13_ghek8")
+to = NodePath("../../OnFloor")
+event = &"on_floor"
+
+[node name="Touched Wall" type="Node" parent="StateChart/ParallelState/MoveState/Double Jumped"]
+script = ExtResource("13_ghek8")
+to = NodePath("../../OnWall")
+event = &"on_wall"
+
+[node name="Fell" type="Node" parent="StateChart/ParallelState/MoveState"]
+script = ExtResource("12_ros3m")
+
+[node name="Land" type="Node" parent="StateChart/ParallelState/MoveState/Fell"]
+script = ExtResource("13_ghek8")
+to = NodePath("../../OnFloor")
+event = &"on_floor"
+
+[node name="Touched Wall" type="Node" parent="StateChart/ParallelState/MoveState/Fell"]
+script = ExtResource("13_ghek8")
+to = NodePath("../../OnWall")
+event = &"on_wall"
+
+[node name="Double Jumped" type="Node" parent="StateChart/ParallelState/MoveState/Fell"]
+script = ExtResource("13_ghek8")
+to = NodePath("../../Double Jumped")
+event = &"jump_pressed"
+
+[node name="OnWall" type="Node" parent="StateChart/ParallelState/MoveState"]
+script = ExtResource("12_ros3m")
+
+[node name="Land" type="Node" parent="StateChart/ParallelState/MoveState/OnWall"]
+script = ExtResource("13_ghek8")
+to = NodePath("../../OnFloor")
+event = &"on_floor"
+
+[node name="Left Wall" type="Node" parent="StateChart/ParallelState/MoveState/OnWall"]
+script = ExtResource("13_ghek8")
+to = NodePath("../../Fell")
+event = &"left_wall"
+
+[node name="Jump" type="Node" parent="StateChart/ParallelState/MoveState/OnWall"]
+script = ExtResource("13_ghek8")
+to = NodePath("../../Jumped")
+event = &"jump_pressed"
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animation_finished"]
 [connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animation_finished"]
-[connection signal="event_received" from="StateChart/ParallelState/FacingDirection/Left" to="." method="_on_facing_left"]
-[connection signal="event_received" from="StateChart/ParallelState/FacingDirection/Right" to="." method="_on_facing_right"]
+[connection signal="state_entered" from="StateChart/ParallelState/MoveState/OnFloor" to="." method="_on_floor_state_entered"]
+[connection signal="state_processing" from="StateChart/ParallelState/MoveState/OnFloor" to="." method="_on_floor_state_processing"]
+[connection signal="state_entered" from="StateChart/ParallelState/MoveState/Jumped" to="." method="_on_jumped_state_entered"]
+[connection signal="state_processing" from="StateChart/ParallelState/MoveState/Jumped" to="." method="_on_in_air_processing"]
+[connection signal="state_entered" from="StateChart/ParallelState/MoveState/Double Jumped" to="." method="_on_double_jumped_state_entered"]
+[connection signal="state_processing" from="StateChart/ParallelState/MoveState/Double Jumped" to="." method="_on_in_air_processing"]
+[connection signal="state_processing" from="StateChart/ParallelState/MoveState/Fell" to="." method="_on_in_air_processing"]
+[connection signal="state_entered" from="StateChart/ParallelState/MoveState/OnWall" to="." method="_on_wall_state_entered"]
+[connection signal="state_exited" from="StateChart/ParallelState/MoveState/OnWall" to="." method="_on_wall_state_exited"]
+[connection signal="state_processing" from="StateChart/ParallelState/MoveState/OnWall" to="." method="_on_wall_state_processing"]

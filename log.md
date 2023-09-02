@@ -6,6 +6,8 @@ Alrighty, getting the main menu controller-usable. For this I want... a Controll
 
 update: Menu gamepad control is now mostly working thanks to [a tut from Nathan Hoad](https://youtu.be/p_m3xgWAFo0)!! Still need to get mouse and the pointer image position working nicely.
 
+update: 2D Sidescroller Player is now using state charts, whoo. What a fun tool!
+
 ## 2023-09-01
 Platformer movement is feeling nice, and I've got the palette stuff working. First off let's make the main menu controller-usable, then I want to explore the intro VN-like sequence.
 
