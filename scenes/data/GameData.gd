@@ -1,5 +1,7 @@
 extends Node
 
+var mouse_sensitivity: float = 0.2
+
 signal vibe_changed(new_vibe: Vibe)
 
 const VIBES: Array[Vibe] = [

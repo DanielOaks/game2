@@ -8,6 +8,8 @@ update: Menu gamepad control is now mostly working thanks to [a tut from Nathan 
 
 update: 2D Sidescroller Player is now using state charts, whoo. What a fun tool!
 
+update: Initial 3D controller is done. Now is time for sleep. Goodnight game <3
+
 ## 2023-09-01
 Platformer movement is feeling nice, and I've got the palette stuff working. First off let's make the main menu controller-usable, then I want to explore the intro VN-like sequence.
 

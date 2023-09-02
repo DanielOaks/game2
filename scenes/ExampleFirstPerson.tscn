@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=3 uid="uid://5xhjd537hbc1"]
+
+[ext_resource type="PackedScene" uid="uid://di87p1t80gp3y" path="res://scenes/Characters/PlayerFP.tscn" id="1_h3oa4"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ik6rq"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_0uoh5"]
+seamless = true
+seamless_blend_skirt = 0.848
+noise = SubResource("FastNoiseLite_ik6rq")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1c50y"]
+albedo_texture = SubResource("NoiseTexture2D_0uoh5")
+uv1_triplanar = true
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f8ken"]
+sky_top_color = Color(0.329412, 0.588235, 0.74902, 1)
+sky_horizon_color = Color(0.632353, 0.689309, 0.720505, 1)
+ground_horizon_color = Color(0.632353, 0.689309, 0.720505, 1)
+
+[sub_resource type="Sky" id="Sky_dn7j8"]
+sky_material = SubResource("ProceduralSkyMaterial_f8ken")
+
+[sub_resource type="Environment" id="Environment_4p115"]
+background_mode = 2
+sky = SubResource("Sky_dn7j8")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="ExampleFirstPerson" type="Node3D"]
+
+[node name="stage" type="Node3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+use_collision = true
+size = Vector3(20, 0.5, 20)
+material = SubResource("StandardMaterial3D_1c50y")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.74059, -7.47456)
+use_collision = true
+size = Vector3(5, 0.5, 5)
+
+[node name="env" type="Node3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="env"]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="env"]
+environment = SubResource("Environment_4p115")
+
+[node name="Player" parent="." instance=ExtResource("1_h3oa4")]
