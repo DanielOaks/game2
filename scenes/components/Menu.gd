@@ -6,6 +6,7 @@ signal actioned(action: String)
 
 func _ready():
 	get_viewport().gui_focus_changed.connect(_on_focus_changed)
+	minimum_size_changed.connect(_on_minimum_size_changed)
 	configure_focus()
 	update_selection()
 
@@ -61,11 +62,13 @@ func update_selection() -> void:
 	var item = get_focused_item()
 	
 	if is_instance_valid(item) and is_instance_valid(pointer) and visible:
-		#print_debug(" f2  ", global_position.x - 50, "  ", item.global_position.y + item.size.y * .5 - 5)
 		pointer.global_position = Vector2(global_position.x - 50, item.global_position.y + item.size.y * .5 - 5)
 
 func _on_focus_changed(item: Control) -> void:
 	if not item: return
 	if not item in get_children(): return
 	
+	update_selection()
+
+func _on_minimum_size_changed() -> void:
 	update_selection()

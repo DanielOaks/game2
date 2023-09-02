@@ -39,3 +39,4 @@ func _process(_delta):
 
 func _on_ready():
 	new_title_image()
+	#$MarginContainer/VBoxContainer/Menu.update_selection()

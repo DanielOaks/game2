@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/MainMenu.gd" id="1_oxux1"]
 [ext_resource type="Texture2D" uid="uid://3b4vlga8svrv" path="res://images/title-images/wordart-1.png" id="2_rcowp"]
-[ext_resource type="Script" path="res://scenes/Menu.gd" id="3_c77ct"]
+[ext_resource type="Script" path="res://scenes/components/Menu.gd" id="3_c77ct"]
 [ext_resource type="LabelSettings" uid="uid://dic356qkmkjbc" path="res://assets/game2/labels/main_menu.tres" id="4_t63w1"]
 [ext_resource type="Texture2D" uid="uid://bqx232qbkgma3" path="res://assets/game2/red-hood-character-palettes.png" id="5_btsbd"]
 

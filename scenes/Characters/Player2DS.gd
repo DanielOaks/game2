@@ -6,7 +6,7 @@ extends CharacterBody2D
 @export var JUMP_WEIGHTLESS_VELOCITY: float = 90
 @export var WALL_JUMP_X_VELOCITY: float = 170
 @export var WALL_SLIDE_VELOCITY: float = 4000
-@export var FRAMES_TO_ALLOW_JUMPING_AFTER_LEAVING_LEDGE: int = 10
+@export var FRAMES_TO_ALLOW_WALL_JUMPING_AFTER_LEAVING_WALL: int = 10
 
 @onready var game_data: GameData = get_node("/root/GameData")
 
@@ -18,6 +18,7 @@ var direction: Vector2 = Vector2.ZERO
 var animation_locked: bool = false
 var moving_into_wall : bool = false
 var update_sprite_after_next_move_and_slide: bool = false
+var wall_jump_slop: int = 0
 
 func _process(_delta):
 	$AnimatedSprite2D.material.set_shader_parameter("paletteNumber", game_data.current_vibe_i)
@@ -46,6 +47,9 @@ func _physics_process(delta):
 	if _is_on_wall != _is_now_on_wall:
 		_is_on_wall = _is_now_on_wall
 		$StateChart.send_event("on_wall" if _is_on_wall else "left_wall")
+	
+	if wall_jump_slop  > 0:
+		wall_jump_slop -= 1
 	
 	# update facing direction
 	direction = Input.get_vector("left", "right", "up", "down")
@@ -156,7 +160,7 @@ func apply_wall_jump_x_velocity():
 
 func _on_jumped_state_entered():
 	velocity.y = JUMP_VELOCITY
-	if is_on_wall() and moving_into_wall:
+	if wall_jump_slop > 0 or (is_on_wall() and moving_into_wall):
 		apply_wall_jump_x_velocity()
 		
 		# do this on the next frame because update_sprite_flip_and_offset detects whether we are on
@@ -187,3 +191,4 @@ func _on_wall_state_entered():
 func _on_wall_state_exited():
 	# wall-slide sprites have weird offsets
 	update_sprite_flip_and_offsets()
+	wall_jump_slop = FRAMES_TO_ALLOW_WALL_JUMPING_AFTER_LEAVING_WALL
