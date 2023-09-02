@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=3 uid="uid://d2dxe6duwx2n4"]
+[gd_scene load_steps=88 format=3 uid="uid://d2dxe6duwx2n4"]
 
 [ext_resource type="Script" path="res://scenes/characters/Player2DS.gd" id="1_wb35k"]
 [ext_resource type="Texture2D" uid="uid://b8homtiindmv3" path="res://assets/red-hood-character/idle sheet-Sheet.png" id="2_1gy65"]
@@ -8,6 +8,12 @@
 [ext_resource type="Texture2D" uid="uid://b7qrf8yqp1k64" path="res://assets/red-hood-character/itch run-Sheet sheet.png" id="3_w8pch"]
 [ext_resource type="Texture2D" uid="uid://q606q1368gwf" path="res://assets/red-hood-character/run turnaround-Sheet.png" id="5_voscn"]
 [ext_resource type="Texture2D" uid="uid://ujcs646d21r8" path="res://assets/red-hood-character/wall slide-Sheet.png" id="6_hlc02"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="9_p0ap0"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="10_kxvje"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="11_aw8ao"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="12_ros3m"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="13_ghek8"]
+[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="14_35pgw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5wn7y"]
 shader = ExtResource("2_s2k6u")
@@ -537,7 +543,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"turnaround",
-"speed": 5.0
+"speed": 14.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -569,9 +575,47 @@ position = Vector2(12, -4)
 sprite_frames = SubResource("SpriteFrames_au1my")
 animation = &"idle"
 autoplay = "idle"
+frame_progress = 0.315257
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_ak1b4")
 
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("9_p0ap0")
+
+[node name="ParallelState" type="Node" parent="StateChart"]
+script = ExtResource("10_kxvje")
+
+[node name="FacingDirection" type="Node" parent="StateChart/ParallelState"]
+script = ExtResource("11_aw8ao")
+initial_state = NodePath("Right")
+
+[node name="Left" type="Node" parent="StateChart/ParallelState/FacingDirection"]
+script = ExtResource("12_ros3m")
+
+[node name="Face Right" type="Node" parent="StateChart/ParallelState/FacingDirection/Left"]
+script = ExtResource("13_ghek8")
+to = NodePath("../../Right")
+event = &"face_right"
+
+[node name="Right" type="Node" parent="StateChart/ParallelState/FacingDirection"]
+script = ExtResource("12_ros3m")
+
+[node name="Face Left" type="Node" parent="StateChart/ParallelState/FacingDirection/Right"]
+script = ExtResource("13_ghek8")
+to = NodePath("../../Left")
+event = &"face_left"
+
+[node name="StateChartDebugger" parent="." instance=ExtResource("14_35pgw")]
+visible = false
+offset_left = 17.0
+offset_top = -66.0
+offset_right = 494.0
+offset_bottom = 284.0
+scale = Vector2(0.3, 0.3)
+initial_node_to_watch = NodePath("../StateChart")
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animation_finished"]
 [connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animation_finished"]
+[connection signal="event_received" from="StateChart/ParallelState/FacingDirection/Left" to="." method="_on_facing_left"]
+[connection signal="event_received" from="StateChart/ParallelState/FacingDirection/Right" to="." method="_on_facing_right"]

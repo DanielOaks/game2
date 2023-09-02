@@ -1,6 +1,11 @@
 # Game 2 dev log
 Here be my thoughts and feelings and vibes while developing this game.
 
+## 2023-09-02
+Alrighty, getting the main menu controller-usable. For this I want... a Controller global that keeps track of whether the last input was the keyboard/mouse or a gamepad. The output from this can be used to display the right kind of icons.
+
+update: Menu gamepad control is now mostly working thanks to [a tut from Nathan Hoad](https://youtu.be/p_m3xgWAFo0)!! Still need to get mouse and the pointer image position working nicely.
+
 ## 2023-09-01
 Platformer movement is feeling nice, and I've got the palette stuff working. First off let's make the main menu controller-usable, then I want to explore the intro VN-like sequence.
 

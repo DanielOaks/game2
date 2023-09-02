@@ -2,14 +2,10 @@ extends Control
 
 @onready var game_data: GameData = get_node("/root/GameData")
 
-func _on_play_pressed():
-	get_tree().change_scene_to_file("res://scenes/ExampleSideScroll.tscn")
-
-func _on_options_pressed():
-	pass # Replace with function body.
-
-func _on_quit_pressed():
-	get_tree().quit()
+func _on_menu_actioned(action: String):
+	if action == "play": get_tree().change_scene_to_file("res://scenes/ExampleSideScroll.tscn")
+	
+	if action == "quit": get_tree().quit()
 
 func get_all_file_paths(path):
 	# ew. is there a path.join kind of function? this will break if the path doesn't have a '/' at the end :pensive:

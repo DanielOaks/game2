@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://vgcathni2t46"]
+[gd_scene load_steps=6 format=3 uid="uid://vgcathni2t46"]
 
 [ext_resource type="Script" path="res://scenes/MainMenu.gd" id="1_oxux1"]
 [ext_resource type="Texture2D" uid="uid://3b4vlga8svrv" path="res://images/title-images/wordart-1.png" id="2_rcowp"]
+[ext_resource type="Script" path="res://scenes/Menu.gd" id="3_c77ct"]
+[ext_resource type="LabelSettings" uid="uid://dic356qkmkjbc" path="res://assets/game2/labels/main_menu.tres" id="4_t63w1"]
+[ext_resource type="Texture2D" uid="uid://bqx232qbkgma3" path="res://assets/game2/red-hood-character-palettes.png" id="5_btsbd"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -43,24 +46,32 @@ texture = ExtResource("2_rcowp")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(100, 0)
+[node name="Menu" type="VBoxContainer" parent="MarginContainer/VBoxContainer" node_paths=PackedStringArray("pointer")]
 layout_mode = 2
 size_flags_horizontal = 4
+script = ExtResource("3_c77ct")
+pointer = NodePath("../../../Pointer")
 
-[node name="Play" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="Play" type="Label" parent="MarginContainer/VBoxContainer/Menu"]
 layout_mode = 2
 text = "Play"
+label_settings = ExtResource("4_t63w1")
 
-[node name="Options" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="Options" type="Label" parent="MarginContainer/VBoxContainer/Menu"]
 layout_mode = 2
 text = "Options"
+label_settings = ExtResource("4_t63w1")
 
-[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="Quit" type="Label" parent="MarginContainer/VBoxContainer/Menu"]
 layout_mode = 2
 text = "Quit"
+label_settings = ExtResource("4_t63w1")
+
+[node name="Pointer" type="Sprite2D" parent="."]
+position = Vector2(481, 436)
+scale = Vector2(2.3, 2.3)
+texture = ExtResource("5_btsbd")
+centered = false
 
 [connection signal="ready" from="." to="." method="_on_ready"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="actioned" from="MarginContainer/VBoxContainer/Menu" to="." method="_on_menu_actioned"]
