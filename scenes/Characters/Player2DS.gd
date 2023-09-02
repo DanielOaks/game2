@@ -20,20 +20,24 @@ var moving_into_wall : bool = false
 var update_sprite_after_next_move_and_slide: bool = false
 var wall_jump_slop: int = 0
 
-func _process(_delta):
-	$AnimatedSprite2D.material.set_shader_parameter("paletteNumber", game_data.current_vibe_i)
-
 # these are used for dispatching events to state chart
 var _is_on_floor: bool = false
 var _is_on_wall: bool = false
 
 func _ready():
+	# set initial vibe
+	game_data.connect("vibe_changed", update_vibe)
+	update_vibe(game_data.current_vibe)
+	
 	# dispatch initial events to state chart
 	_is_on_floor = is_on_floor()
 	$StateChart.send_event("on_floor" if _is_on_floor else "left_floor")
 	_is_on_wall = is_on_wall()
 	if _is_on_wall:
 		$StateChart.send_event("on_wall")
+
+func update_vibe(new_vibe: Vibe):
+	$AnimatedSprite2D.material.set_shader_parameter("paletteNumber", game_data.current_vibe_i)
 
 func _physics_process(delta):
 	# dispatch floor and wallevents to state chart
