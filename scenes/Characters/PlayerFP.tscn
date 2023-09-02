@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://di87p1t80gp3y"]
 
-[ext_resource type="Script" path="res://scenes/Characters/PlayerFP.gd" id="1_6ulys"]
+[ext_resource type="Script" path="res://scenes/characters/PlayerFP.gd" id="1_6ulys"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uj3fj"]
 

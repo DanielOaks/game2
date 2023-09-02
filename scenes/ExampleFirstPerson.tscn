@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://5xhjd537hbc1"]
 
-[ext_resource type="PackedScene" uid="uid://di87p1t80gp3y" path="res://scenes/Characters/PlayerFP.tscn" id="1_h3oa4"]
+[ext_resource type="PackedScene" uid="uid://di87p1t80gp3y" path="res://scenes/characters/PlayerFP.tscn" id="1_h3oa4"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ik6rq"]
 

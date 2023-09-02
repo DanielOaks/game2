@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://knk7nvdpus7o"]
 
 [ext_resource type="Texture2D" uid="uid://1vmpowkruim6" path="res://assets/generic-platformer-tiles/generic_platformer_tiles.png" id="1_dgetb"]
-[ext_resource type="PackedScene" uid="uid://d2dxe6duwx2n4" path="res://scenes/Characters/Player2DS.tscn" id="2_gnkco"]
+[ext_resource type="PackedScene" uid="uid://d2dxe6duwx2n4" path="res://scenes/characters/Player2DS.tscn" id="2_gnkco"]
 [ext_resource type="PackedScene" uid="uid://dqov77x6i66vu" path="res://scenes/overlays/UI2DS.tscn" id="3_1rs52"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sxxq5"]
