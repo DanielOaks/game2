@@ -36,7 +36,7 @@ func _ready():
 	if _is_on_wall:
 		$StateChart.send_event("on_wall")
 
-func update_vibe(new_vibe: Vibe):
+func update_vibe(_new_vibe: Vibe):
 	$AnimatedSprite2D.material.set_shader_parameter("paletteNumber", game_data.current_vibe_i)
 
 func _physics_process(delta):
@@ -135,7 +135,7 @@ func _on_floor_state_entered():
 	$AnimatedSprite2D.play("jump_land")
 	animation_locked = true
 
-func _on_floor_state_processing(delta):
+func _on_floor_state_processing(_delta):
 	if animation_locked: return
 
 	if direction.x == 0:
@@ -144,7 +144,7 @@ func _on_floor_state_processing(delta):
 		$AnimatedSprite2D.play("run")
 
 
-func _on_in_air_processing(delta):
+func _on_in_air_processing(_delta):
 	if animation_locked: return
 	
 	if velocity.y < -JUMP_WEIGHTLESS_VELOCITY:
@@ -185,7 +185,7 @@ func _on_double_jumped_state_entered():
 		velocity.y += DOUBLE_JUMP_VELOCITY
 
 
-func _on_wall_state_processing(delta):
+func _on_wall_state_processing(_delta):
 	$AnimatedSprite2D.play("wallgrab")
 
 func _on_wall_state_entered():
