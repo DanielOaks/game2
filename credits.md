@@ -12,3 +12,7 @@
 - https://opengameart.org/content/generic-platformer-tiles
 - https://thoseawesomeguys.com/prompts/
 - 
+
+## Addons
+
+- Godot State Charts: https://godotengine.org/asset-library/asset/1778

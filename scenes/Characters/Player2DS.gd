@@ -67,7 +67,7 @@ func _physics_process(delta):
 
 	# Gravity
 	var this_wall_slide_velocity = WALL_SLIDE_VELOCITY * delta
-	if is_on_wall() and moving_into_wall and not is_on_floor and velocity.y > this_wall_slide_velocity:
+	if is_on_wall() and moving_into_wall and velocity.y > this_wall_slide_velocity:
 		velocity.y = this_wall_slide_velocity
 	else:
 		velocity.y += gravity * delta
