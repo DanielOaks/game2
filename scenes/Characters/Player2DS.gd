@@ -54,6 +54,7 @@ func _physics_process(delta):
 	
 	if wall_jump_slop  > 0:
 		wall_jump_slop -= 1
+		print_debug("slop ", wall_jump_slop)
 	
 	# update facing direction
 	direction = Input.get_vector("left", "right", "up", "down")
@@ -161,6 +162,7 @@ func apply_wall_jump_x_velocity():
 		velocity.x = WALL_JUMP_X_VELOCITY
 	else:
 		velocity.x = -WALL_JUMP_X_VELOCITY
+	wall_jump_slop = 1
 
 func _on_jumped_state_entered():
 	velocity.y = JUMP_VELOCITY
@@ -177,6 +179,9 @@ func _on_jumped_state_entered():
 
 
 func _on_double_jumped_state_entered():
+	if wall_jump_slop > 0:
+		apply_wall_jump_x_velocity()
+	
 	# if we're already moving down our double jump would get cancelled-out by gravity...
 	#  that feels bad, so just do this
 	if velocity.y > 0:

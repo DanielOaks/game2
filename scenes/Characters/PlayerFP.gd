@@ -11,6 +11,7 @@ var direction = Vector3.ZERO
 var crouching: bool = false
 
 @onready var game_data: GameData = get_node("/root/GameData")
+@onready var controller: Controller = get_node("/root/Controller")
 @onready var default_head_height: float = $Head.position.y
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -19,21 +20,33 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
+func clamp_head_rotation():
+	$Head.rotation.x = clamp($Head.rotation.x, deg_to_rad(-90), deg_to_rad(90))
+
 func _input(event):
 	if event is InputEventMouseMotion:
 		rotate_y(deg_to_rad(-event.relative.x * game_data.mouse_sensitivity))
 		$Head.rotate_x(deg_to_rad(-event.relative.y * game_data.mouse_sensitivity))
 
-	if event is InputEventJoypadMotion:
-		# move here too
-		pass
+	clamp_head_rotation()
 
-	$Head.rotation.x = clamp($Head.rotation.x, deg_to_rad(-90), deg_to_rad(90))
+func _process(delta):
+	# look around based on right thumbstick
+	var look_dir = Input.get_vector("look_left", "look_right", "look_up", "look_down")
+	rotate_y(deg_to_rad(-look_dir.x * game_data.stick_sensitivity * delta))
+	$Head.rotate_x(deg_to_rad(-look_dir.y * game_data.stick_sensitivity * delta))
+	clamp_head_rotation()
 
 func _physics_process(delta):
 	# enable and disable collision shapes as needed
-	if crouching != Input.is_action_pressed("crouch"):
-		crouching = Input.is_action_pressed("crouch")
+	var now_crouching: bool
+	if controller.current == Controller.ControllerType.Gamepad:
+		now_crouching = (not crouching) if Input.is_action_just_pressed("toggle_crouch") else crouching
+	else:
+		now_crouching = Input.is_action_pressed("crouch")
+	
+	if crouching != now_crouching:
+		crouching = now_crouching
 		
 		if not crouching and $StandingRaycast.is_colliding():
 			# we can't stand, sit back down

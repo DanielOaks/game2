@@ -1,6 +1,7 @@
 extends Node
 
 var mouse_sensitivity: float = 0.2
+var stick_sensitivity: float = 125
 
 signal vibe_changed(new_vibe: Vibe)
 

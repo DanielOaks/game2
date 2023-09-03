@@ -664,7 +664,6 @@ event = &"on_floor"
 script = ExtResource("13_ghek8")
 to = NodePath("../../Fell")
 event = &"left_wall"
-delay_seconds = 0.2
 
 [node name="Jump" type="Node" parent="StateChart/ParallelState/MoveState/OnWall"]
 script = ExtResource("13_ghek8")
