@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://5xhjd537hbc1"]
+[gd_scene load_steps=10 format=3 uid="uid://5xhjd537hbc1"]
 
 [ext_resource type="PackedScene" uid="uid://di87p1t80gp3y" path="res://scenes/characters/PlayerFP.tscn" id="1_h3oa4"]
 
@@ -13,6 +13,13 @@ noise = SubResource("FastNoiseLite_ik6rq")
 albedo_texture = SubResource("NoiseTexture2D_0uoh5")
 uv1_triplanar = true
 
+[sub_resource type="Gradient" id="Gradient_yyx2b"]
+offsets = PackedFloat32Array(0.0564263, 0.974922)
+colors = PackedColorArray(0.00514083, 0.0656177, 0.109212, 1, 0.985333, 0.968074, 0.930993, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fjd74"]
+gradient = SubResource("Gradient_yyx2b")
+
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f8ken"]
 sky_top_color = Color(0.329412, 0.588235, 0.74902, 1)
 sky_horizon_color = Color(0.632353, 0.689309, 0.720505, 1)
@@ -24,8 +31,16 @@ sky_material = SubResource("ProceduralSkyMaterial_f8ken")
 [sub_resource type="Environment" id="Environment_4p115"]
 background_mode = 2
 sky = SubResource("Sky_dn7j8")
+ambient_light_color = Color(0.878431, 0.917647, 0.933333, 1)
 tonemap_mode = 2
+tonemap_exposure = 0.41
+tonemap_white = 1.52
+ssao_enabled = true
+ssil_radius = 6.1
+ssil_intensity = 0.93
 glow_enabled = true
+adjustment_enabled = true
+adjustment_color_correction = SubResource("GradientTexture1D_fjd74")
 
 [node name="ExampleFirstPerson" type="Node3D"]
 
@@ -131,7 +146,9 @@ size = Vector3(48.3731, 30.5847, 22.8245)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="env"]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+light_energy = 5.36
 shadow_enabled = true
+directional_shadow_mode = 0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="env"]
 environment = SubResource("Environment_4p115")
