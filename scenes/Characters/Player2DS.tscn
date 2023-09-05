@@ -572,9 +572,8 @@ script = ExtResource("1_wb35k")
 material = SubResource("ShaderMaterial_5wn7y")
 position = Vector2(12, -4)
 sprite_frames = SubResource("SpriteFrames_au1my")
-animation = &"idle"
+animation = &"jump_going_down"
 autoplay = "idle"
-frame_progress = 0.315257
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_ak1b4")

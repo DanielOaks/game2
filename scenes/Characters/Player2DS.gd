@@ -54,7 +54,6 @@ func _physics_process(delta):
 	
 	if wall_jump_slop  > 0:
 		wall_jump_slop -= 1
-		print_debug("slop ", wall_jump_slop)
 	
 	# update facing direction
 	direction = Input.get_vector("left", "right", "up", "down")
