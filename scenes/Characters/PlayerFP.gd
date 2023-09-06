@@ -14,11 +14,19 @@ var crouching: bool = false
 @onready var controller: Controller = get_node("/root/Controller")
 @onready var default_head_height: float = $Head.position.y
 
+@onready var cloakCurrentMaterial: BaseMaterial3D = $Head/Camera3D/CloakViewmodel.get_children()[0].get_active_material(0)
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
+	game_data.connect("vibe_changed", update_vibe)
+	update_vibe(game_data.current_vibe)
+
+func update_vibe(_new_vibe: Vibe):
+	cloakCurrentMaterial.albedo_color = game_data.cloak_base_colour
 
 func clamp_head_rotation():
 	$Head.rotation.x = clamp($Head.rotation.x, deg_to_rad(-90), deg_to_rad(90))

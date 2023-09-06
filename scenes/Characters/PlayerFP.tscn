@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://di87p1t80gp3y"]
 
 [ext_resource type="Script" path="res://scenes/characters/PlayerFP.gd" id="1_6ulys"]
-[ext_resource type="PackedScene" uid="uid://dqov77x6i66vu" path="res://scenes/overlays/UI2DS.tscn" id="2_1e0fh"]
+[ext_resource type="PackedScene" uid="uid://climvn0dqrcci" path="res://assets/game2/models/cloak.blend" id="2_rig7e"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uj3fj"]
 
@@ -25,20 +25,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
 
-[node name="Hood" type="CSGPolygon3D" parent="Head/Camera3D"]
-transform = Transform3D(1.25, 0, 0, 0, 0.892349, -0.162639, 0, 0.1171, 1.23937, 0, 0.0136596, 0.100254)
-gi_mode = 2
-polygon = PackedVector2Array(-0.424914, -0.228532, -0.547661, 0.0163054, -0.44287, 0.264678, -0.158092, 0.426931, 0.00412128, 0.451228, 0.310205, 0.38431, 0.518943, 0.129477, 0.470046, -0.288167, 0.29216, -0.462833, 0.167957, -0.800083, 0.623069, -0.859948, 0.72542, 0.274811, 0.0624739, 0.777447, -0.720269, 0.261674, -0.621497, -0.937299, -0.205971, -0.802547, -0.298395, -0.46557)
-depth = 0.56
-smooth_faces = true
+[node name="CloakViewmodel" parent="Head/Camera3D" instance=ExtResource("2_rig7e")]
 
-[node name="Hood Back" type="CSGPolygon3D" parent="Head/Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 0.99671, -0.0810513, 0, 0.0810513, 0.99671, 0, 0.000648737, 0.209082)
-gi_mode = 2
-polygon = PackedVector2Array(-0.773851, 0.128039, -0.427073, 0.433409, 0.0692304, 0.650055, 0.553206, 0.415022, 0.698097, 0.0865313, 0.660612, -0.397222, 0.276131, -0.62963, -0.355667, -0.644162, -0.686704, -0.237071)
-depth = 0.1
+[node name="Sphere" parent="Head/Camera3D/CloakViewmodel" index="0"]
+layers = 2
+
+[node name="InsideCloakLight" type="OmniLight3D" parent="Head/Camera3D"]
+light_color = Color(0.870588, 0.698039, 0.65098, 1)
+light_energy = 0.471
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+light_cull_mask = 4294967294
 
 [node name="StandingRaycast" type="RayCast3D" parent="."]
 target_position = Vector3(0, 2, 0)
 
-[node name="CanvasLayer" parent="." instance=ExtResource("2_1e0fh")]
+[editable path="Head/Camera3D/CloakViewmodel"]

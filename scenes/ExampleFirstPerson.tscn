@@ -1,6 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://5xhjd537hbc1"]
+[gd_scene load_steps=12 format=3 uid="uid://5xhjd537hbc1"]
 
 [ext_resource type="PackedScene" uid="uid://di87p1t80gp3y" path="res://scenes/characters/PlayerFP.tscn" id="1_h3oa4"]
+[ext_resource type="PackedScene" uid="uid://bjspc78n0scwk" path="res://assets/game2/cube.blend" id="2_73ttu"]
+[ext_resource type="PackedScene" uid="uid://dqov77x6i66vu" path="res://scenes/overlays/UI2DS.tscn" id="3_fwefr"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ik6rq"]
 
@@ -31,7 +33,8 @@ sky_material = SubResource("ProceduralSkyMaterial_f8ken")
 [sub_resource type="Environment" id="Environment_4p115"]
 background_mode = 2
 sky = SubResource("Sky_dn7j8")
-ambient_light_color = Color(0.878431, 0.917647, 0.933333, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.427451, 0.423529, 0.568627, 1)
 tonemap_mode = 2
 tonemap_exposure = 0.41
 tonemap_white = 1.52
@@ -146,6 +149,7 @@ size = Vector3(48.3731, 30.5847, 22.8245)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="env"]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 6.49624, 3.34628, 1.20487)
+light_color = Color(1, 0.92549, 0.831373, 1)
 light_energy = 5.36
 light_bake_mode = 1
 shadow_enabled = true
@@ -158,3 +162,13 @@ environment = SubResource("Environment_4p115")
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 
 [node name="BakedLightmap" type="LightmapGI" parent="."]
+
+[node name="cube" parent="." instance=ExtResource("2_73ttu")]
+transform = Transform3D(-0.0986208, -0.206818, -0.973396, -0.993474, -0.0358609, 0.108274, -0.0573, 0.977722, -0.201932, -3.16264, 1.1906, -2.29865)
+
+[node name="Sphere" parent="cube" index="0"]
+transform = Transform3D(0.0596896, -0.956569, 0.285329, 0.998217, 0.0571993, -0.0170617, -7.45058e-08, 0.285839, 0.958278, 0, 0, 0)
+
+[node name="UI" parent="." instance=ExtResource("3_fwefr")]
+
+[editable path="cube"]

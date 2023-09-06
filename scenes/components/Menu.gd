@@ -1,6 +1,9 @@
 class_name Menu extends VBoxContainer
 
 @export var pointer: Node2D
+@export var uiAudioStreamPlayer: AudioStreamPlayer2D
+
+var buttonSound = preload("res://assets/freesound/677861__el_boss__ui-button-click.wav")
 
 signal actioned(action: String)
 
@@ -17,6 +20,8 @@ func _unhandled_input(event):
 	
 	var item = get_focused_item()
 	if is_instance_valid(item) and event.is_action_pressed("ui_accept"):
+		uiAudioStreamPlayer.stream = buttonSound
+		uiAudioStreamPlayer.play()
 		actioned.emit(item.text.to_lower())
 
 func get_items() -> Array[Control]:
@@ -67,6 +72,9 @@ func update_selection() -> void:
 func _on_focus_changed(item: Control) -> void:
 	if not item: return
 	if not item in get_children(): return
+	
+	uiAudioStreamPlayer.stream = buttonSound
+	uiAudioStreamPlayer.play()
 	
 	update_selection()
 

@@ -12,8 +12,18 @@ const VIBES: Array[Vibe] = [
 	preload("res://assets/game2/vibes/warm_ice.tres"),
 ]
 
+var paletteImage: Image = preload("res://assets/game2/red-hood-character-palettes.png").get_image()
+
+var cloak_base_colour: Color
+var shorts_base_colour: Color
+var skin_base_colour: Color
+var hair_base_colour: Color
+
 var current_vibe_i: int = 0
 var current_vibe: Vibe = VIBES[current_vibe_i]
+
+func _ready():
+	update_colours()
 
 # temp, for now
 func _process(_delta):
@@ -35,5 +45,12 @@ func prev_vibe():
 	change_vibe()
 
 func change_vibe():
+	update_colours()
 	current_vibe = VIBES[current_vibe_i]
 	vibe_changed.emit(current_vibe)
+
+func update_colours():
+	cloak_base_colour = paletteImage.get_pixel(2, current_vibe_i)
+	shorts_base_colour = paletteImage.get_pixel(9, current_vibe_i)
+	skin_base_colour = paletteImage.get_pixel(13, current_vibe_i)
+	hair_base_colour = paletteImage.get_pixel(15, current_vibe_i)
