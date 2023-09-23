@@ -3,6 +3,7 @@ extends Control
 @onready var game_data: GameData = get_node("/root/GameData")
 
 func _on_menu_actioned(action: String):
+	if action == "play": get_tree().change_scene_to_file("res://scenes/SelectVibe.tscn")
 	if action == "play 2d": get_tree().change_scene_to_file("res://scenes/ExampleSideScroll.tscn")
 	if action == "play 3d": get_tree().change_scene_to_file("res://scenes/ExampleFirstPerson.tscn")
 	

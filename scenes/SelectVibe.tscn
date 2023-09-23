@@ -1,0 +1,58 @@
+[gd_scene load_steps=4 format=3 uid="uid://dx1cbxrd3ht4x"]
+
+[ext_resource type="Script" path="res://scenes/SelectVibe.gd" id="1_gh1lq"]
+[ext_resource type="Script" path="res://scenes/components/Menu.gd" id="3_bgjbt"]
+[ext_resource type="Texture2D" uid="uid://bqx232qbkgma3" path="res://assets/game2/red-hood-character-palettes.png" id="5_ljq4w"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gh1lq")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.545098, 0.2, 0.172549, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Choose your vibe"
+horizontal_alignment = 1
+
+[node name="Menu" type="VBoxContainer" parent="MarginContainer/VBoxContainer" node_paths=PackedStringArray("pointer", "uiAudioStreamPlayer")]
+layout_mode = 2
+size_flags_horizontal = 4
+script = ExtResource("3_bgjbt")
+pointer = NodePath("../../../Pointer")
+uiAudioStreamPlayer = NodePath("../../../AudioStreamPlayer2D")
+
+[node name="Pointer" type="Sprite2D" parent="."]
+position = Vector2(481, 436)
+scale = Vector2(2.3, 2.3)
+texture = ExtResource("5_ljq4w")
+centered = false
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
+[connection signal="actioned" from="MarginContainer/VBoxContainer/Menu" to="." method="_on_menu_actioned"]

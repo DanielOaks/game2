@@ -53,6 +53,11 @@ script = ExtResource("3_c77ct")
 pointer = NodePath("../../../Pointer")
 uiAudioStreamPlayer = NodePath("../../../AudioStreamPlayer2D")
 
+[node name="Play" type="Label" parent="MarginContainer/VBoxContainer/Menu"]
+layout_mode = 2
+text = "Play"
+label_settings = ExtResource("4_t63w1")
+
 [node name="Play 2D" type="Label" parent="MarginContainer/VBoxContainer/Menu"]
 layout_mode = 2
 text = "Play 2D"
