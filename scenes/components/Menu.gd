@@ -24,8 +24,6 @@ func _unhandled_input(event):
 		emit_actioned(item)
 
 func emit_actioned(item: Control) -> void:
-	uiAudioStreamPlayer.stream = buttonSound
-	uiAudioStreamPlayer.play()
 	actioned.emit(item.text.to_lower())
 
 func get_items() -> Array[Control]:
@@ -79,6 +77,7 @@ func update_selection() -> void:
 func _on_mouse_entered(item: Control) -> void:
 	if not item: return
 	if not item in get_children(): return
+	if item.has_focus(): return
 	
 	uiAudioStreamPlayer.stream = buttonSound
 	uiAudioStreamPlayer.play()
