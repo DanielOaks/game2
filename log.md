@@ -1,6 +1,12 @@
 # Game 2 dev log
 Here be my thoughts and feelings and vibes while developing this game.
 
+## 2023-09-28
+And now the actual intro scene, let's go.
+
+## 2023-09-23
+Been a busy month, but getting there! Started proper Play flow, starting off with the Vibe selector.
+
 ## 2023-09-02
 Alrighty, getting the main menu controller-usable. For this I want... a Controller global that keeps track of whether the last input was the keyboard/mouse or a gamepad. The output from this can be used to display the right kind of icons.
 

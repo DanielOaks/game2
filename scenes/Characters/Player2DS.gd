@@ -8,6 +8,10 @@ extends CharacterBody2D
 @export var WALL_SLIDE_VELOCITY: float = 4000
 @export var FRAMES_TO_ALLOW_WALL_JUMPING_AFTER_LEAVING_WALL: int = 10
 
+@export var JUMPING_ALLOWED: bool = true
+@export var WALL_SLIDING_ALLOWED: bool = true
+@export var MOVING_ALLOWED: bool = true
+
 @onready var game_data: GameData = get_node("/root/GameData")
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -30,6 +34,9 @@ func _ready():
 	update_vibe(game_data.current_vibe)
 	
 	# dispatch initial events to state chart
+	$StateChart.set_expression_property("jumping_allowed", JUMPING_ALLOWED)
+	$StateChart.set_expression_property("onwall_allowed", WALL_SLIDING_ALLOWED)
+	
 	_is_on_floor = is_on_floor()
 	$StateChart.send_event("on_floor" if _is_on_floor else "left_floor")
 	_is_on_wall = is_on_wall()
@@ -57,6 +64,8 @@ func _physics_process(delta):
 	
 	# update facing direction
 	direction = Input.get_vector("left", "right", "up", "down")
+	if not MOVING_ALLOWED:
+		direction = Vector2.ZERO
 
 	if direction and direction.x != 0:
 		var now_facing = facing
@@ -118,6 +127,9 @@ func update_sprite_flip_and_offsets():
 		$AnimatedSprite2D.flip_h = false
 		$AnimatedSprite2D.offset.x = 0
 
+# movement changes
+func set_moving_allowed(value):
+	MOVING_ALLOWED = value
 
 # animation sprite signals
 func _on_animation_finished():

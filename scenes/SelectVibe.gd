@@ -27,4 +27,4 @@ func _on_menu_actioned(action):
 	game_data.set_vibe_to(i)
 	game_data.lock_vibe()
 	
-	get_tree().change_scene_to_file("res://scenes/ExampleSideScroll.tscn")
+	get_tree().change_scene_to_file("res://scenes/Intro.tscn")
