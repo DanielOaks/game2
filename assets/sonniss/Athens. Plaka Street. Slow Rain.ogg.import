@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://33cqndha1dcf"
+path="res://.godot/imported/Athens. Plaka Street. Slow Rain.ogg-70e86aef85eed57b0c215116cef97eb9.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sonniss/Athens. Plaka Street. Slow Rain.ogg"
+dest_files=["res://.godot/imported/Athens. Plaka Street. Slow Rain.ogg-70e86aef85eed57b0c215116cef97eb9.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

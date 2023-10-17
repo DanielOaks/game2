@@ -1,0 +1,220 @@
+[gd_scene load_steps=15 format=3 uid="uid://dqvk0u6fqxawi"]
+
+[ext_resource type="Script" path="res://scenes/EyeMonsterVN.gd" id="1_u3px1"]
+[ext_resource type="Texture2D" uid="uid://cmmi3t5fhns0v" path="res://assets/game2/sprites/eym-idle.png" id="1_vl0f2"]
+[ext_resource type="Script" path="res://scenes/characters/EymMovingAbout.gd" id="2_4536s"]
+[ext_resource type="Texture2D" uid="uid://dhgauqv25bwfx" path="res://assets/game2/sprites/eym-blink.png" id="3_e5bth"]
+
+[sub_resource type="Gradient" id="Gradient_pmrp8"]
+colors = PackedColorArray(0, 0, 0, 1, 0.068, 0.6086, 0.68, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nxx4t"]
+gradient = SubResource("Gradient_pmrp8")
+width = 1024
+height = 1024
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mt25v"]
+animations = [{
+"frames": [{
+"duration": 32.0,
+"texture": ExtResource("1_vl0f2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_e5bth")
+}, {
+"duration": 48.0,
+"texture": ExtResource("1_vl0f2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_e5bth")
+}, {
+"duration": 12.0,
+"texture": ExtResource("1_vl0f2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_e5bth")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_3ijy1"]
+offsets = PackedFloat32Array(0, 0.514286, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2y416"]
+gradient = SubResource("Gradient_3ijy1")
+width = 20
+
+[sub_resource type="Gradient" id="Gradient_xqljm"]
+offsets = PackedFloat32Array(0, 0.635897, 1)
+colors = PackedColorArray(0, 1, 1, 1, 0.85, 0, 0.5525, 1, 0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_1gdde"]
+resource_name = "fade_in"
+length = 13.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/FadeInOut:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.0117647, 0.0196078, 0.0509804, 1), Color(0.027451, 0.0470588, 0.105882, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("Label:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.3, 4.8, 5.7, 10.3, 10.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": ["", "Welcome", "", "Today is your lucky day", "", "Do you know why?"]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"start_dialog"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_s4rwg"]
+resource_name = "fade_out"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/FadeInOut:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.0117647, 0.0196078, 0.0509804, 0), Color(0.0117647, 0.0196078, 0.0509804, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.6, 2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"fade_out_music"
+}, {
+"args": [],
+"method": &"next_scene"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3f0cb"]
+_data = {
+"fade_in": SubResource("Animation_1gdde"),
+"fade_out": SubResource("Animation_s4rwg")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_ya1mg"]
+shadow_size = 31
+shadow_color = Color(0.94902, 0.984314, 0, 0)
+
+[node name="EyeMonsterVN" type="Node2D"]
+script = ExtResource("1_u3px1")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = -100
+
+[node name="bg" type="ColorRect" parent="CanvasLayer2"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="StuffInScene" type="Node2D" parent="."]
+position = Vector2(178, 93)
+
+[node name="Camera2D" type="Camera2D" parent="StuffInScene"]
+position = Vector2(-34, -12)
+zoom = Vector2(4, 4)
+position_smoothing_enabled = true
+position_smoothing_speed = 20.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+
+[node name="EymBg" type="Sprite2D" parent="StuffInScene/Camera2D"]
+z_index = -15
+scale = Vector2(0.2, 0.2)
+texture = SubResource("GradientTexture2D_nxx4t")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="StuffInScene/Camera2D"]
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_mt25v")
+animation = &"idle"
+frame_progress = 0.145084
+script = ExtResource("2_4536s")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="StuffInScene/Camera2D/AnimatedSprite2D"]
+z_index = -13
+scale = Vector2(2, 2)
+amount = 32
+texture = SubResource("GradientTexture1D_2y416")
+emission_shape = 1
+emission_sphere_radius = 100.0
+gravity = Vector2(0, 150)
+initial_velocity_max = 150.0
+color_ramp = SubResource("Gradient_xqljm")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="FadeInOut" type="ColorRect" parent="CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0117647, 0.0196078, 0.0509804, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_3f0cb")
+}
+
+[node name="Label" type="Label" parent="."]
+z_index = 30
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 129.0
+offset_top = 137.0
+offset_right = 197.0
+offset_bottom = 163.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.6, 0.6)
+label_settings = SubResource("LabelSettings_ya1mg")

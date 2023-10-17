@@ -17,7 +17,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5wn7y"]
 shader = ExtResource("2_s2k6u")
-shader_parameter/paletteNumber = 1.0
+shader_parameter/paletteNumber = 2.0
 shader_parameter/paletteTexture = ExtResource("3_qh8hj")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qb7t8"]
@@ -438,7 +438,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"jump_start",
-"speed": 8.0
+"speed": 16.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -602,8 +602,9 @@ z_index = 6
 material = SubResource("ShaderMaterial_5wn7y")
 position = Vector2(12, -4)
 sprite_frames = SubResource("SpriteFrames_au1my")
-animation = &"jump_going_down"
+animation = &"jump_start"
 autoplay = "idle"
+frame_progress = 0.306487
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_ak1b4")

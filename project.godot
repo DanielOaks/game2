@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 GameData="*res://scenes/data/GameData.gd"
 Controller="*res://scenes/data/Controller.gd"
 Dialogic="*res://addons/dialogic/Other/DialogicGameHandler.gd"
+BackgroundMusic="*res://scenes/data/BackgroundMusic.tscn"
 
 [dialogic]
 
@@ -40,6 +41,12 @@ choices/reveal_delay=0
 choices/reveal_by_input=false
 save/autosave_delay=60.0
 text/autopauses={}
+layout/styles={
+"Default": {
+"layout": "res://addons/dialogic/Modules/DefaultLayouts/Default/DialogicDefaultLayout.tscn"
+}
+}
+layout/default_style="Default"
 
 [display]
 

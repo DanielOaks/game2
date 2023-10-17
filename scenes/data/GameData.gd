@@ -25,6 +25,8 @@ var current_vibe: Vibe = VIBES[current_vibe_i]
 
 func _ready():
 	update_colours()
+	
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 
 # temp, for now
 func _process(_delta):

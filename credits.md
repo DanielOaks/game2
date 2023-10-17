@@ -12,7 +12,9 @@
 - https://opengameart.org/content/generic-platformer-tiles
 - https://thoseawesomeguys.com/prompts/
 - https://opengameart.org/content/16x16-dark-tech-base-tileset
-- 
+- https://freesound.org/people/Kronek9/sounds/702660/
+- Sonniss.com - GDC 2018 - Game Audio Bundle - George Karagioules - The Source. Ambiences from Athens - Athens. Plaka Street. Slow Rain
+
 
 ## Addons
 

@@ -1,5 +1,6 @@
 extends Node2D
 
+@onready var background_music = get_node("/root/BackgroundMusic")
 @onready var game_data: GameData = get_node("/root/GameData")
 @onready var bg_light_1 = $"StuffInScene/BG light 1"
 @onready var objects_light_1 = $"StuffInScene/Objects light 1"
@@ -7,6 +8,8 @@ extends Node2D
 @onready var tile_map = $StuffInScene/TileMap
 
 @onready var initialSt = Time.get_ticks_msec()
+
+var bgMusic = preload("res://assets/sonniss/Athens. Plaka Street. Slow Rain.ogg")
 
 func _ready():
 	# setup vibe portrait
@@ -16,6 +19,9 @@ func _ready():
 	# print_debug(tile_map.get_cell_source_id(tile_map_layer, tile_map_cell_position))
 	# print_debug(tile_map.get_cell_atlas_coords(tile_map_layer, tile_map_cell_position))
 	# print_debug(tile_map.get_cell_alternative_tile(tile_map_layer, tile_map_cell_position))
+	
+	# bg music
+	background_music.play(bgMusic)
 	
 	# start cutscene intro
 	$CanvasLayer/FadeInOut.visible = true
@@ -43,9 +49,12 @@ func _on_animation_finished(anim_name):
 		$StuffInScene/Player2DS.set_moving_allowed(true)
 		$StuffInScene/Player2DS/RemoteTransform2D.update_position = true
 	elif anim_name == "fade_out":
-		print_debug("Transition to new scene")
+		get_tree().change_scene_to_file("res://scenes/EyeMonsterVN.tscn")
 
 func _on_fade_out_collider_body_entered(body):
 	if body != $StuffInScene/Player2DS:
 		return
 	$AnimationPlayer.play("fade_out")
+
+func fade_out_bg_music():
+	background_music.fade_out(3.6)
