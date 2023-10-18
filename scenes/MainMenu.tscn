@@ -68,9 +68,9 @@ layout_mode = 2
 text = "Play 3D"
 label_settings = ExtResource("4_t63w1")
 
-[node name="Options" type="Label" parent="MarginContainer/VBoxContainer/Menu"]
+[node name="Settings" type="Label" parent="MarginContainer/VBoxContainer/Menu"]
 layout_mode = 2
-text = "Options"
+text = "Settings"
 label_settings = ExtResource("4_t63w1")
 
 [node name="Quit" type="Label" parent="MarginContainer/VBoxContainer/Menu"]

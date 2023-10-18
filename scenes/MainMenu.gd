@@ -6,6 +6,7 @@ func _on_menu_actioned(action: String):
 	if action == "play": get_tree().change_scene_to_file("res://scenes/SelectVibe.tscn")
 	if action == "play 2d": get_tree().change_scene_to_file("res://scenes/ExampleSideScroll.tscn")
 	if action == "play 3d": get_tree().change_scene_to_file("res://scenes/ExampleFirstPerson.tscn")
+	if action == "settings": get_tree().change_scene_to_file("res://scenes/SettingsMenu.tscn")
 	
 	if action == "quit": get_tree().quit()
 

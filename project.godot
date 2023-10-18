@@ -20,7 +20,7 @@ config/icon="res://icon.svg"
 GameData="*res://scenes/data/GameData.gd"
 Controller="*res://scenes/data/Controller.gd"
 Dialogic="*res://addons/dialogic/Other/DialogicGameHandler.gd"
-BackgroundMusic="*res://scenes/data/BackgroundMusic.tscn"
+BackgroundMusic="*res://scenes/usable/BackgroundMusic.tscn"
 
 [dialogic]
 

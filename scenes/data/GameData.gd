@@ -1,7 +1,82 @@
+# stores both live game data and settings that are stored in the config.
+# we do this in two separate sections, to make things easier to read
 extends Node
 
-var mouse_sensitivity: float = 0.2
-var stick_sensitivity: float = 125
+## shared
+
+func _ready():
+	# settings
+	var err = _config.load(_config_path)
+	if err != OK:
+		# file didn't load, so ignore
+		return
+	
+	set_window_mode(fullscreen)
+	set_vsync_mode(vsync)
+	
+	# live game data
+	update_colours()
+
+func _process(_delta):
+	if _vibe_locked: return
+
+	if Input.is_action_just_pressed("next_vibe"):
+		next_vibe()
+	if Input.is_action_just_pressed("previous_vibe"):
+		prev_vibe()
+
+## settings
+
+const _config_path = "user://settings.cfg"
+var _config := ConfigFile.new()
+
+var fullscreen: bool :
+	get:
+		return _config.get_value("video", "fullscreen", false)
+	set(value):
+		_config.set_value("video", "fullscreen", value)
+		_config.save(_config_path)
+		set_window_mode(value)
+		fullscreen = value
+
+func set_window_mode(set_fullscreen: bool):
+	if set_fullscreen:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MAXIMIZED)
+
+var vsync: bool :
+	get:
+		return _config.get_value("video", "vsync", false)
+	set(value):
+		_config.set_value("video", "vsync", value)
+		_config.save(_config_path)
+		set_vsync_mode(value)
+		vsync = value
+
+func set_vsync_mode(enable: bool):
+	if enable:
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
+	else:
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+
+var mouse_sensitivity: float :
+	get:
+		return _config.get_value("control", "mouse_sensitivity", 0.2)
+	set(value):
+		_config.set_value("control", "mouse_sensitivity", value)
+		_config.save(_config_path)
+		mouse_sensitivity = value
+
+var stick_sensitivity: float :
+	get:
+		return _config.get_value("control", "stick_sensitivity", 125)
+	set(value):
+		_config.set_value("control", "stick_sensitivity", value)
+		_config.save(_config_path)
+		stick_sensitivity = value
+
+## live game data
 
 signal vibe_changed(new_vibe: Vibe)
 
@@ -22,20 +97,6 @@ var hair_base_colour: Color
 var _vibe_locked: bool = false
 var current_vibe_i: int = 0
 var current_vibe: Vibe = VIBES[current_vibe_i]
-
-func _ready():
-	update_colours()
-	
-	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-
-# temp, for now
-func _process(_delta):
-	if _vibe_locked: return
-
-	if Input.is_action_just_pressed("next_vibe"):
-		next_vibe()
-	if Input.is_action_just_pressed("previous_vibe"):
-		prev_vibe()
 
 # locking the vibe prevents the next/prev buttons from changing the vibe
 func lock_vibe():
