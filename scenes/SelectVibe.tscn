@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scenes/components/Menu.gd" id="3_bgjbt"]
 [ext_resource type="Texture2D" uid="uid://bqx232qbkgma3" path="res://assets/game2/red-hood-character-palettes.png" id="5_ljq4w"]
 
-[node name="MainMenu" type="Control"]
+[node name="SelectVibeMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -47,6 +47,18 @@ script = ExtResource("3_bgjbt")
 pointer = NodePath("../../../Pointer")
 uiAudioStreamPlayer = NodePath("../../../AudioStreamPlayer2D")
 
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 15
+
+[node name="VibeDescription" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.827451)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.152941)
+theme_override_font_sizes/font_size = 13
+text = "Vibe description"
+horizontal_alignment = 1
+
 [node name="Pointer" type="Sprite2D" parent="."]
 position = Vector2(481, 436)
 scale = Vector2(2.3, 2.3)
@@ -56,3 +68,4 @@ centered = false
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="actioned" from="MarginContainer/VBoxContainer/Menu" to="." method="_on_menu_actioned"]
+[connection signal="selection_changed" from="MarginContainer/VBoxContainer/Menu" to="." method="_on_menu_selection_changed"]

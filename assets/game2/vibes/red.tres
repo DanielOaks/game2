@@ -5,3 +5,4 @@
 [resource]
 script = ExtResource("1_cimby")
 name = "Classic"
+tagline = "Like a fairy-tale"

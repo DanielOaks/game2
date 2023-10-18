@@ -95,7 +95,7 @@ var skin_base_colour: Color
 var hair_base_colour: Color
 
 var _vibe_locked: bool = false
-var current_vibe_i: int = 0
+var current_vibe_i: int = 1
 var current_vibe: Vibe = VIBES[current_vibe_i]
 
 # locking the vibe prevents the next/prev buttons from changing the vibe

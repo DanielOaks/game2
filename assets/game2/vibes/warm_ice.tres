@@ -5,3 +5,4 @@
 [resource]
 script = ExtResource("1_2avcy")
 name = "Warm ice"
+tagline = "warm ice"

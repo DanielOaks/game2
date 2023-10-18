@@ -18,7 +18,8 @@ func _process(_delta):
 
 func start_dialog():
 	Dialogic.timeline_ended.connect(_on_timeline_ended)
-	Dialogic.start("res://dialogic/eyemonstervn_{vibe}.dtl".format({"vibe": game_data.current_vibe_i}))
+	Dialogic.VAR.set_variable("vibe", game_data.current_vibe_i)
+	Dialogic.start("res://dialogic/eyemonstervn.dtl")
 
 func _on_timeline_ended():
 	Dialogic.timeline_ended.disconnect(_on_timeline_ended)

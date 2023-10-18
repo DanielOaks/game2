@@ -1,9 +1,0 @@
-# vibe: Classic
-eyemonster: Welcome!
-[wait time="0.5"]
-eyemonster: Today is your lucky day
-- Why?
-	eyemonster: Because you're going to a world of wonder
-- I don't think it is...
-	[wait time="1.0"]
-	eyemonster: Oh, I think you should be more optimistic, friend

@@ -6,6 +6,7 @@ class_name Menu extends VBoxContainer
 var buttonSound = preload("res://assets/freesound/677861__el_boss__ui-button-click.wav")
 
 signal actioned(action: String)
+signal selection_changed(index: int)
 
 func _ready():
 	get_viewport().gui_focus_changed.connect(_on_focus_changed)
@@ -73,6 +74,7 @@ func update_selection() -> void:
 	
 	if is_instance_valid(item) and is_instance_valid(pointer) and visible:
 		pointer.global_position = Vector2(global_position.x - 50, item.global_position.y + item.size.y * .5 - 5)
+		emit_signal("selection_changed", get_children().find(item))
 
 func _on_mouse_entered(item: Control) -> void:
 	if not item: return

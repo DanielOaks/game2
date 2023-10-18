@@ -25,7 +25,9 @@ BackgroundMusic="*res://scenes/usable/BackgroundMusic.tscn"
 [dialogic]
 
 glossary/default_case_sensitive=true
-variables={}
+variables={
+"vibe": "0"
+}
 settings/text_speed=0.01
 text/skippable=true
 text/skippable_delay=0.1

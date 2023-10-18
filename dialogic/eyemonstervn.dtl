@@ -1,0 +1,20 @@
+if {vibe} == 0:
+	# vibe: Classic
+	eyemonster: Welcome, Red
+	[wait time="0.5"]
+	eyemonster: You should already know how these tales go
+	eyemonster: You frolic around
+	eyemonster: You get captured by the big bad wolf
+	eyemonster: And everyone learns a lesson.
+	[wait time="1.25"]
+	eyemonster: We've all got our parts to play
+	eyemonster: And I won't stop you from playing yours.
+	[wait time="1.25"]
+	eyemonster: [speed=0.4][tornado radius=2.0 freq=1.0 connected=1]Now...[/tornado] [speed]go enjoy the sunshine
+elif {vibe} == 1:
+	# vibe: Spiky
+	eyemonster: What do we have here?
+	eyemonster: Mmm, [tornado radius=2.0 freq=0.2 connected=1][b][color=red]destruction[/color][/b][/tornado]...
+	eyemonster: My favourite.
+	[wait time="1.25"]
+	eyemonster: Enjoy yourself out there

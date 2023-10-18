@@ -5,3 +5,4 @@
 [resource]
 script = ExtResource("1_dn5jc")
 name = "Kawaii"
+tagline = "kawaii"
