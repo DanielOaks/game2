@@ -3,14 +3,10 @@
 [ext_resource type="Script" path="res://scenes/settings/Settings.gd" id="1_h3v5u"]
 [ext_resource type="PackedScene" uid="uid://cal70qi63pfq8" path="res://scenes/settings/UISettingCheckbox.tscn" id="2_3cg6v"]
 [ext_resource type="PackedScene" uid="uid://dhrqfjuc8wi8a" path="res://scenes/settings/UISettingSlider.tscn" id="3_d262b"]
-
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_kywm4"]
-color = Color(0.929412, 0.929412, 0.929412, 0.215686)
-grow_begin = -5.0
-grow_end = -5.0
-thickness = 2
+[ext_resource type="Theme" uid="uid://bpgjohkfj7o1s" path="res://scenes/settings/default_settings_theme.tres" id="4_kafsc"]
 
 [node name="SettingsMenu" type="Panel"]
+theme = ExtResource("4_kafsc")
 script = ExtResource("1_h3v5u")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -25,6 +21,8 @@ layout_mode = 2
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.278431)
+theme_override_constants/shadow_outline_size = 2
 theme_override_constants/line_spacing = 20
 theme_override_font_sizes/font_size = 25
 text = "Settings"
@@ -41,7 +39,6 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Video" type="MarginContainer" parent="VBoxContainer/TabContainer"]
-visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
@@ -60,6 +57,7 @@ layout_mode = 2
 title = "VSync"
 
 [node name="Audio" type="MarginContainer" parent="VBoxContainer/TabContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
@@ -76,8 +74,7 @@ max_value = 100.0
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer/TabContainer/Audio/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 10
-theme_override_styles/separator = SubResource("StyleBoxLine_kywm4")
+theme = ExtResource("4_kafsc")
 
 [node name="UIVolume" parent="VBoxContainer/TabContainer/Audio/VBoxContainer" instance=ExtResource("3_d262b")]
 layout_mode = 2

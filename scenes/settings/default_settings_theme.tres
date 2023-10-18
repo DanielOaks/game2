@@ -1,0 +1,11 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bpgjohkfj7o1s"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_ca4dj"]
+color = Color(0.929412, 0.929412, 0.929412, 0.215686)
+grow_begin = -5.0
+grow_end = -5.0
+thickness = 2
+
+[resource]
+HSeparator/constants/separation = 10
+HSeparator/styles/separator = SubResource("StyleBoxLine_ca4dj")

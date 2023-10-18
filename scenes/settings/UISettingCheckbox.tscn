@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cal70qi63pfq8"]
+[gd_scene load_steps=3 format=3 uid="uid://cal70qi63pfq8"]
 
 [ext_resource type="Script" path="res://scenes/settings/UISettingCheckbox.gd" id="1_mb274"]
+[ext_resource type="Theme" uid="uid://bpgjohkfj7o1s" path="res://scenes/settings/default_settings_theme.tres" id="2_5cl1p"]
 
 [node name="UISettingCheckbox" type="HBoxContainer"]
 offset_right = 29.0
@@ -15,5 +16,6 @@ size_flags_horizontal = 3
 [node name="CheckBox" type="CheckBox" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("2_5cl1p")
 
 [connection signal="toggled" from="CheckBox" to="." method="_on_check_box_toggled"]
