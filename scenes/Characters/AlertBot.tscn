@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://dgxs1dicyafcn"]
+
+[ext_resource type="Script" path="res://scenes/characters/AlertBot.gd" id="1_c7j12"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_pqtnw"]
+height = 1.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xf7v6"]
+albedo_color = Color(0.815686, 0.368627, 0.376471, 1)
+roughness = 0.65
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sg2u0"]
+height = 1.4
+
+[node name="AlertBot" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.346689, 0)
+script = ExtResource("1_c7j12")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+mesh = SubResource("CapsuleMesh_pqtnw")
+surface_material_override/0 = SubResource("StandardMaterial3D_xf7v6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+shape = SubResource("CapsuleShape3D_sg2u0")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_height_offset = 0.7
