@@ -43,8 +43,11 @@ func _physics_process(delta):
 		# reset time
 		next_wander_target_refresh = refresh_wander_target_seconds
 		
-		# choose a new wander target
-		var wander_dir := new_direction() * wander_distance #todo: why does this not always send the wander dir the same distance away?
+		# choose a new wander target.
+		# note, on the edges of the navmesh, it may *look like* the wander distance is lower than
+		#  this value. what's really happening is that a wander target outside the navmesh is being
+		#  chosen, and the bot can only walk to the closest point. this is fine!
+		var wander_dir := new_direction() * wander_distance
 		wander_target = position
 		wander_target.x += wander_dir.x
 		wander_target.y += wander_dir.y

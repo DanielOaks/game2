@@ -171,3 +171,17 @@ transform = Transform3D(0.279075, 0, -0.960269, 0, 1, 0, 0.960269, 0, 0.279075, 
 [node name="AlertBot" parent="." node_paths=PackedStringArray("target") instance=ExtResource("5_kmb22")]
 target = NodePath("../Player")
 wander_distance = 7.5
+
+[node name="AlertBot2" parent="." node_paths=PackedStringArray("target") instance=ExtResource("5_kmb22")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.27072, 0.346689, 7.37618)
+target = NodePath("../Player")
+wander_distance = 7.5
+speed = 5.0
+accel = 12.0
+
+[node name="AlertBot3" parent="." node_paths=PackedStringArray("target") instance=ExtResource("5_kmb22")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.5242, 0.346689, -7.41464)
+target = NodePath("../Player")
+wander_distance = 7.5
+speed = 2.0
+accel = 5.0

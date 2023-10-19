@@ -1,6 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dgxs1dicyafcn"]
+[gd_scene load_steps=9 format=3 uid="uid://dgxs1dicyafcn"]
 
 [ext_resource type="Script" path="res://scenes/characters/AlertBot.gd" id="1_c7j12"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="2_jep6e"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="3_qgjlb"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_g5hnq"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="5_v72qy"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_pqtnw"]
 height = 1.4
@@ -27,3 +31,22 @@ shape = SubResource("CapsuleShape3D_sg2u0")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 path_height_offset = 0.7
+
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("2_jep6e")
+
+[node name="ParallelState" type="Node" parent="StateChart"]
+script = ExtResource("3_qgjlb")
+
+[node name="CompoundState" type="Node" parent="StateChart/ParallelState"]
+script = ExtResource("4_g5hnq")
+initial_state = NodePath("Wandering")
+
+[node name="StaringAtTarget" type="Node" parent="StateChart/ParallelState/CompoundState"]
+script = ExtResource("5_v72qy")
+
+[node name="Searching" type="Node" parent="StateChart/ParallelState/CompoundState"]
+script = ExtResource("5_v72qy")
+
+[node name="Wandering" type="Node" parent="StateChart/ParallelState/CompoundState"]
+script = ExtResource("5_v72qy")
