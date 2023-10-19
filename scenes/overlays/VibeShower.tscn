@@ -1,0 +1,69 @@
+[gd_scene load_steps=8 format=3 uid="uid://cbvrkdhjylkaj"]
+
+[ext_resource type="Script" path="res://scenes/overlays/VibeShower.gd" id="1_fhm2f"]
+[ext_resource type="Texture2D" uid="uid://fqc14jqvg1i4" path="res://assets/xelu-free-controller-and-keyboard-prompts/XboxSeriesX_LB.png" id="2_jxf08"]
+[ext_resource type="Texture2D" uid="uid://b446b3dr88joo" path="res://assets/xelu-free-controller-and-keyboard-prompts/XboxSeriesX_RB.png" id="3_2uuuk"]
+[ext_resource type="Texture2D" uid="uid://bpoydf0rb64sv" path="res://assets/xelu-free-controller-and-keyboard-prompts/X_Key_Dark.png" id="4_5wqr8"]
+[ext_resource type="Texture2D" uid="uid://ja08st44t2tu" path="res://assets/xelu-free-controller-and-keyboard-prompts/Z_Key_Dark.png" id="5_dw7e1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_cescj"]
+line_spacing = 0.0
+font_size = 22
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 0.592157)
+
+[sub_resource type="LabelSettings" id="LabelSettings_n21r4"]
+line_spacing = 0.0
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 0.415686)
+
+[node name="VibeShower" type="VBoxContainer"]
+offset_left = 928.0
+offset_top = 13.0
+offset_right = 1132.0
+offset_bottom = 199.0
+script = ExtResource("1_fhm2f")
+
+[node name="VibeName" type="Label" parent="."]
+layout_mode = 2
+text = "Vibe Name Here"
+label_settings = SubResource("LabelSettings_cescj")
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "Vibe"
+label_settings = SubResource("LabelSettings_n21r4")
+horizontal_alignment = 1
+
+[node name="ControllerButtons" type="HBoxContainer" parent="."]
+clip_contents = true
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+alignment = 1
+
+[node name="Lb" type="TextureRect" parent="ControllerButtons"]
+layout_mode = 2
+texture = ExtResource("2_jxf08")
+expand_mode = 2
+
+[node name="Rb" type="TextureRect" parent="ControllerButtons"]
+layout_mode = 2
+texture = ExtResource("3_2uuuk")
+expand_mode = 2
+
+[node name="KeyboardButtons" type="HBoxContainer" parent="."]
+clip_contents = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+alignment = 1
+
+[node name="Prev" type="TextureRect" parent="KeyboardButtons"]
+layout_mode = 2
+texture = ExtResource("4_5wqr8")
+expand_mode = 2
+
+[node name="Next" type="TextureRect" parent="KeyboardButtons"]
+layout_mode = 2
+texture = ExtResource("5_dw7e1")
+expand_mode = 2

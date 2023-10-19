@@ -9,7 +9,7 @@ extends Node2D
 
 @onready var initialSt = Time.get_ticks_msec()
 
-var bgMusic = preload("res://assets/sonniss/Athens. Plaka Street. Slow Rain.ogg")
+var bgRain = preload("res://assets/sonniss/Athens. Plaka Street. Slow Rain.ogg")
 
 func _ready():
 	# setup vibe portrait
@@ -21,7 +21,12 @@ func _ready():
 	# print_debug(tile_map.get_cell_alternative_tile(tile_map_layer, tile_map_cell_position))
 	
 	# bg music
-	background_music.play(bgMusic)
+	if game_data.current_vibe_i == 2:
+		# bouncy, much less rain
+		pass
+		$StuffInScene/Camera2D/Rain.amount = 24
+	else:
+		background_music.play(bgRain)
 	
 	# start cutscene intro
 	$CanvasLayer/FadeInOut.visible = true

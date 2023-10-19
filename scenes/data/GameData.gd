@@ -98,13 +98,17 @@ var _vibe_locked: bool = false
 var current_vibe_i: int = 1
 var current_vibe: Vibe = VIBES[current_vibe_i]
 
+signal vibe_lock_changed(now_locked: bool)
+
 # locking the vibe prevents the next/prev buttons from changing the vibe
 func lock_vibe():
 	_vibe_locked = true
+	emit_signal("vibe_lock_changed", true)
 
 # unlocking the vibe means it can be freely changed
 func unlock_vibe():
 	_vibe_locked = false
+	emit_signal("vibe_lock_changed", false)
 
 func set_vibe_to(new_vibe: int):
 	current_vibe_i = new_vibe

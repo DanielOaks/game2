@@ -17,4 +17,13 @@ elif {vibe} == 1:
 	eyemonster: Mmm, [tornado radius=2.0 freq=0.2 connected=1][b][color=red]destruction[/color][/b][/tornado]...
 	eyemonster: My favourite.
 	[wait time="1.25"]
-	eyemonster: Enjoy yourself out there
+	eyemonster: Enjoy yourself out there.
+elif {vibe} == 2:
+	# vibe: Bouncy
+	eyemonster: Bounce
+	eyemonster: Bounce
+	eyemonster: Bounce
+	eyemonster: Bounce...
+	eyemonster: Bounce
+	[wait time="1.25"]
+	eyemonster: Hehe

@@ -1,19 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://5xhjd537hbc1"]
+[gd_scene load_steps=11 format=3 uid="uid://5xhjd537hbc1"]
 
 [ext_resource type="PackedScene" uid="uid://di87p1t80gp3y" path="res://scenes/characters/PlayerFP.tscn" id="1_h3oa4"]
 [ext_resource type="PackedScene" uid="uid://bjspc78n0scwk" path="res://assets/game2/cube.blend" id="2_73ttu"]
+[ext_resource type="Script" path="res://scenes/usable/FlickeringVisibility.gd" id="2_qc40h"]
 [ext_resource type="PackedScene" uid="uid://dqov77x6i66vu" path="res://scenes/overlays/UI2DS.tscn" id="3_fwefr"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_ik6rq"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_0uoh5"]
-seamless = true
-seamless_blend_skirt = 0.848
-noise = SubResource("FastNoiseLite_ik6rq")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1c50y"]
-albedo_texture = SubResource("NoiseTexture2D_0uoh5")
-uv1_triplanar = true
+[ext_resource type="PackedScene" uid="uid://dbwvlqrnltiqi" path="res://assets/game2/models/stage-1.blend" id="4_miv6w"]
 
 [sub_resource type="Gradient" id="Gradient_yyx2b"]
 offsets = PackedFloat32Array(0.0564263, 0.974922)
@@ -23,18 +14,20 @@ colors = PackedColorArray(0.00514083, 0.0656177, 0.109212, 1, 0.985333, 0.968074
 gradient = SubResource("Gradient_yyx2b")
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f8ken"]
-sky_top_color = Color(0.329412, 0.588235, 0.74902, 1)
-sky_horizon_color = Color(0.632353, 0.689309, 0.720505, 1)
-ground_horizon_color = Color(0.632353, 0.689309, 0.720505, 1)
+sky_top_color = Color(0.0588235, 0.156863, 0.211765, 1)
+sky_horizon_color = Color(0.231373, 0.270588, 0.290196, 1)
+ground_horizon_color = Color(0.447059, 0.505882, 0.537255, 1)
 
 [sub_resource type="Sky" id="Sky_dn7j8"]
 sky_material = SubResource("ProceduralSkyMaterial_f8ken")
+radiance_size = 1
 
 [sub_resource type="Environment" id="Environment_4p115"]
 background_mode = 2
 sky = SubResource("Sky_dn7j8")
 ambient_light_source = 2
 ambient_light_color = Color(0.427451, 0.423529, 0.568627, 1)
+ambient_light_energy = 0.6
 tonemap_mode = 2
 tonemap_exposure = 0.41
 tonemap_white = 1.52
@@ -42,115 +35,114 @@ ssao_enabled = true
 ssil_radius = 6.1
 ssil_intensity = 0.93
 glow_enabled = true
+fog_enabled = true
+fog_light_energy = 0.5
+volumetric_fog_enabled = true
 adjustment_enabled = true
 adjustment_color_correction = SubResource("GradientTexture1D_fjd74")
 
 [node name="ExampleFirstPerson" type="Node3D"]
 
-[node name="stage" type="Node3D" parent="."]
+[node name="stage" parent="." instance=ExtResource("4_miv6w")]
 
-[node name="CSGBox3D" type="CSGBox3D" parent="stage"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.8865, -0.25, 0)
-use_collision = true
-size = Vector3(104.479, 0.5, 33.3938)
-material = SubResource("StandardMaterial3D_1c50y")
+[node name="OmniLight3D" type="OmniLight3D" parent="stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.5039, 13.6776, 4.88959)
+light_color = Color(1, 0.0901961, 0.105882, 1)
+light_energy = 30.0
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 24.8497
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="stage"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.5603, 1.74059, -8.41209)
-use_collision = true
-size = Vector3(19.7163, 0.5, 48.8354)
+[node name="Eyes" type="Node3D" parent="stage"]
+script = ExtResource("2_qc40h")
 
-[node name="CSGBox3D14" type="CSGBox3D" parent="stage"]
-transform = Transform3D(0.998262, 0, -0.0589405, -0.0130752, 0.975084, -0.221452, 0.0574719, 0.221838, 0.973388, -7.54188, 5.90897, 15.6045)
-use_collision = true
-size = Vector3(16.4952, 0.5, 16.4766)
+[node name="OmniLight3D2" type="OmniLight3D" parent="stage/Eyes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.1161, 7.25938, -6.6695)
+light_color = Color(0.611765, 0.533333, 0.333333, 1)
+light_energy = 5.0
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 13.386
 
-[node name="CSGBox3D15" type="CSGBox3D" parent="stage"]
-transform = Transform3D(1, 0, 0, 0, 0.849285, 0.527934, 0, -0.527934, 0.849285, -8.4252, 7.2966, 16.1248)
-use_collision = true
-size = Vector3(13.1594, 0.282697, 4.32106)
+[node name="OmniLight3D3" type="OmniLight3D" parent="stage/Eyes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.6701, 7.25938, -6.99134)
+light_color = Color(0.611765, 0.533333, 0.333333, 1)
+light_energy = 5.0
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 0.3
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="stage"]
-transform = Transform3D(-0.112935, -0.434196, -0.893711, 0.98158, 0.090748, -0.168127, 0.154103, -0.896236, 0.41595, 15.1591, 2.4478, 16.0009)
-use_collision = true
-size = Vector3(25.4476, 12.8495, 30.5361)
+[node name="OmniLight3D4" type="OmniLight3D" parent="stage/Eyes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.1913, 7.25938, -7.38835)
+light_color = Color(0.611765, 0.533333, 0.333333, 1)
+light_energy = 5.0
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 0.3
 
-[node name="CSGBox3D8" type="CSGBox3D" parent="stage"]
-transform = Transform3D(-0.104467, -0.384584, -0.91716, 0.981199, -0.190338, -0.031949, -0.162283, -0.903253, 0.397237, 25.5703, 18.6158, 17.2378)
-use_collision = true
-size = Vector3(2.89306, 88.6461, 3.82684)
+[node name="SpotLight3D" type="SpotLight3D" parent="stage"]
+transform = Transform3D(-0.895682, -0.289779, 0.337315, -0.0545996, 0.824455, 0.563288, -0.44133, 0.48611, -0.754271, -17.3627, 20.4363, -14.4068)
+light_color = Color(0.8, 1, 0.960784, 1)
+light_energy = 100.0
+light_size = 0.2
+shadow_enabled = true
+spot_range = 143.308
+spot_angle = 13.0
 
-[node name="CSGBox3D11" type="CSGBox3D" parent="stage"]
-transform = Transform3D(0.0269347, -0.37943, -0.924828, 0.988465, 0.148041, -0.031949, 0.149035, -0.9133, 0.379041, 19.4174, 12.2615, 2.7217)
-use_collision = true
-size = Vector3(0.736629, 15.9183, 0.389388)
+[node name="SpotLight3D2" type="SpotLight3D" parent="stage"]
+transform = Transform3D(-0.670061, -0.535942, -0.513599, -0.733506, 0.371823, 0.568961, -0.113962, 0.757967, -0.642261, -16.6351, 20.6381, -15.6969)
+light_color = Color(0.8, 1, 0.960784, 1)
+light_energy = 100.0
+light_size = 0.2
+shadow_enabled = true
+spot_range = 143.308
+spot_angle = 12.0
 
-[node name="CSGBox3D13" type="CSGBox3D" parent="stage"]
-transform = Transform3D(0.0269347, -0.32393, -0.945697, 0.988465, 0.149675, -0.0231156, 0.149035, -0.934166, 0.324225, 18.1462, 12.2211, 3.21924)
-use_collision = true
-size = Vector3(0.736629, 15.9183, 0.389388)
+[node name="SpotLight3D3" type="SpotLight3D" parent="stage"]
+transform = Transform3D(-0.928915, -0.347789, -0.12712, -0.278359, 0.882248, -0.379676, 0.244199, -0.317302, -0.916344, 36.3166, 26.6056, 40.7238)
+light_color = Color(0.952941, 0, 0.12549, 1)
+light_energy = 100.0
+light_size = 0.2
+light_bake_mode = 1
+shadow_enabled = true
+spot_range = 143.308
+spot_angle = 40.26
 
-[node name="CSGBox3D12" type="CSGBox3D" parent="stage"]
-transform = Transform3D(0.0269347, -0.463049, -0.885923, 0.988465, 0.144467, -0.0454568, 0.149035, -0.87448, 0.461599, 20.721, 12.3066, 2.18743)
-use_collision = true
-size = Vector3(0.736629, 15.9183, 0.389388)
+[node name="SpotLight3D4" type="SpotLight3D" parent="stage"]
+transform = Transform3D(-0.914734, 0.139323, -0.379278, 0.207976, -0.642432, -0.737582, -0.346422, -0.753571, 0.558678, 19.1077, 9.88077, -25.5817)
+light_color = Color(0.952941, 0, 0.12549, 1)
+light_energy = 70.0
+light_size = 0.2
+light_bake_mode = 1
+shadow_enabled = true
+spot_range = 143.308
+spot_angle = 40.26
 
-[node name="CSGBox3D6" type="CSGBox3D" parent="stage"]
-transform = Transform3D(-0.112525, 0.0632936, -0.991631, 0.982612, 0.155418, -0.101582, 0.147688, -0.985819, -0.0796817, -13.5647, -0.755053, 15.0327)
-use_collision = true
-size = Vector3(25.4476, 0.5, 30.5361)
-
-[node name="CSGBox3D16" type="CSGBox3D" parent="stage"]
-transform = Transform3D(-0.00420615, 0.0628613, -0.998013, 0.999976, 0.00571289, -0.00385467, 0.00545922, -0.998006, -0.062884, -7.48255, -0.553682, 12.4544)
-use_collision = true
-size = Vector3(1.85848, 6.79982, 13.9147)
-
-[node name="CSGBox3D17" type="CSGBox3D" parent="stage"]
-transform = Transform3D(-0.00420615, 0.0628613, -0.998013, 0.999976, 0.00571289, -0.00385467, 0.00545922, -0.998006, -0.062884, -13.8026, 3.61391, 9.46453)
-use_collision = true
-size = Vector3(7.08146, 1.05485, 0.268256)
-
-[node name="CSGBox3D18" type="CSGBox3D" parent="stage"]
-transform = Transform3D(-0.00100111, 0.0628612, -0.998022, 0.999984, 0.00571289, -0.000643328, 0.00566114, -0.998006, -0.0628661, -0.866381, 3.66481, 10.2796)
-use_collision = true
-size = Vector3(7.08146, 1.05485, 0.268256)
-
-[node name="CSGBox3D7" type="CSGBox3D" parent="stage"]
-transform = Transform3D(0.0847608, 0.114766, -0.98977, 0.983394, 0.15035, 0.101648, 0.160478, -0.981949, -0.100116, -49.6034, -6.04291, 23.5515)
-use_collision = true
-size = Vector3(41.3491, 28.7474, 41.7736)
-
-[node name="CSGBox3D9" type="CSGBox3D" parent="stage"]
-transform = Transform3D(-0.0446604, -0.128235, -0.990738, 0.994394, 0.0894417, -0.056402, 0.0958459, -0.987703, 0.123521, -43.8477, -4.02633, 0.27314)
-use_collision = true
-size = Vector3(11.007, 28.7474, 26.7669)
-
-[node name="CSGBox3D4" type="CSGBox3D" parent="stage"]
-transform = Transform3D(0.184844, -0.0736671, -0.980003, 0.951471, -0.236237, 0.19722, -0.246042, -0.968899, 0.0264249, -3.14106, 2.03078, -14.5394)
-use_collision = true
-size = Vector3(25.911, 0.5, 55.557)
-
-[node name="CSGBox3D5" type="CSGBox3D" parent="stage"]
-transform = Transform3D(-0.763005, -0.603181, -0.232369, 0.143033, 0.193025, -0.970713, 0.630369, -0.773896, -0.0610047, -49.6172, 16.9439, -15.9591)
-use_collision = true
-size = Vector3(54.7741, 36.6806, 38.8971)
-
-[node name="CSGBox3D19" type="CSGBox3D" parent="stage"]
-transform = Transform3D(0.0138782, -0.999247, -0.0362313, 0.00737366, 0.0363358, -0.999313, 0.999877, 0.0136014, 0.0078722, -23.4628, 0.425888, -17.4459)
-use_collision = true
-size = Vector3(15.8716, 16.5162, 10.1471)
-
-[node name="CSGBox3D10" type="CSGBox3D" parent="stage"]
-transform = Transform3D(0.266313, -0.404076, -0.8751, 0.962861, 0.1534, 0.222188, 0.0444586, -0.901771, 0.429921, 45.9152, 12.802, 65.4439)
-use_collision = true
-size = Vector3(48.3731, 30.5847, 22.8245)
+[node name="SpotLight3D5" type="SpotLight3D" parent="stage"]
+transform = Transform3D(-0.822454, 0.363764, 0.437316, 0.153091, 0.881982, -0.445726, -0.547844, -0.29964, -0.781078, -7.12508, 6.67785, 23.6301)
+light_color = Color(0.898039, 0.192157, 0.235294, 1)
+light_energy = 300.0
+light_size = 0.2
+light_bake_mode = 1
+shadow_enabled = true
+spot_range = 143.308
+spot_angle = 40.26
 
 [node name="env" type="Node3D" parent="."]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="env"]
+[node name="SunLight" type="DirectionalLight3D" parent="env"]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 6.49624, 3.34628, 1.20487)
+visible = false
 light_color = Color(1, 0.92549, 0.831373, 1)
 light_energy = 5.36
+light_bake_mode = 1
+shadow_enabled = true
+directional_shadow_mode = 1
+
+[node name="MoonLight" type="DirectionalLight3D" parent="env"]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 6.49624, 3.34628, 1.20487)
+light_color = Color(1, 0.92549, 0.831373, 1)
+light_energy = 0.2
 light_bake_mode = 1
 shadow_enabled = true
 directional_shadow_mode = 1
@@ -159,7 +151,7 @@ directional_shadow_mode = 1
 environment = SubResource("Environment_4p115")
 
 [node name="Player" parent="." instance=ExtResource("1_h3oa4")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.0376, 0)
 
 [node name="BakedLightmap" type="LightmapGI" parent="."]
 
