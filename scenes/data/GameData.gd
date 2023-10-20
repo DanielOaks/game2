@@ -13,6 +13,9 @@ func _ready():
 	
 	set_window_mode(fullscreen)
 	set_vsync_mode(vsync)
+	set_volume("Master", game_volume)
+	set_volume("UI", ui_volume)
+	set_volume("BG", bg_volume)
 	
 	# live game data
 	update_colours()
@@ -59,6 +62,37 @@ func set_vsync_mode(enable: bool):
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
 	else:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+
+var game_volume: float :
+	get:
+		return _config.get_value("audio", "volume", 100.0)
+	set(value):
+		_config.set_value("audio", "volume", value)
+		_config.save(_config_path)
+		set_volume("Master", value)
+		game_volume = value
+
+var ui_volume: float :
+	get:
+		return _config.get_value("audio", "ui_volume", 100.0)
+	set(value):
+		_config.set_value("audio", "ui_volume", value)
+		_config.save(_config_path)
+		set_volume("UI", value)
+		ui_volume = value
+
+var bg_volume: float :
+	get:
+		return _config.get_value("audio", "bg_volume", 100.0)
+	set(value):
+		_config.set_value("audio", "bg_volume", value)
+		_config.save(_config_path)
+		set_volume("BG", value)
+		bg_volume = value
+
+## Set the volume of the given bus, with `value` being from 0 to 100.
+func set_volume(bus_name: String, value: float):
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(bus_name), linear_to_db(value / 100.0))
 
 var mouse_sensitivity: float :
 	get:

@@ -85,6 +85,7 @@ texture = ExtResource("5_btsbd")
 centered = false
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+bus = &"UI"
 
 [connection signal="ready" from="." to="." method="_on_ready"]
 [connection signal="actioned" from="MarginContainer/VBoxContainer/Menu" to="." method="_on_menu_actioned"]

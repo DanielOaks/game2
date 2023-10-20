@@ -39,7 +39,6 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Video" type="MarginContainer" parent="VBoxContainer/TabContainer"]
-visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
@@ -95,6 +94,7 @@ layout_mode = 2
 text = "BG Volume"
 
 [node name="Controls" type="MarginContainer" parent="VBoxContainer/TabContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
@@ -126,6 +126,9 @@ max_value = 300.0
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Close" to="." method="_on_close_pressed"]
 [connection signal="toggled" from="VBoxContainer/TabContainer/Video/VBoxContainer/Fullscreen" to="." method="_on_fullscreen_toggled"]
 [connection signal="toggled" from="VBoxContainer/TabContainer/Video/VBoxContainer/VSync" to="." method="_on_vsync_toggled"]
+[connection signal="value_changed" from="VBoxContainer/TabContainer/Audio/VBoxContainer/MainVolume" to="." method="_on_main_volume_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/TabContainer/Audio/VBoxContainer/UIVolume" to="." method="_on_ui_volume_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/TabContainer/Audio/VBoxContainer/BGVolume" to="." method="_on_bg_volume_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/TabContainer/Controls/VBoxContainer/MouseSensitivity" to="." method="_on_mouse_sensitivity_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/TabContainer/Controls/VBoxContainer/StickSensitivity" to="." method="_on_stick_sensitivity_value_changed"]
 
