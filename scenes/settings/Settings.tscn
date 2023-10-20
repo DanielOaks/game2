@@ -39,6 +39,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Video" type="MarginContainer" parent="VBoxContainer/TabContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
@@ -50,11 +51,15 @@ layout_mode = 2
 
 [node name="Fullscreen" parent="VBoxContainer/TabContainer/Video/VBoxContainer" instance=ExtResource("2_3cg6v")]
 layout_mode = 2
-title = "Full screen"
+
+[node name="Label" parent="VBoxContainer/TabContainer/Video/VBoxContainer/Fullscreen" index="0"]
+text = "Fullscreen"
 
 [node name="VSync" parent="VBoxContainer/TabContainer/Video/VBoxContainer" instance=ExtResource("2_3cg6v")]
 layout_mode = 2
-title = "VSync"
+
+[node name="Label" parent="VBoxContainer/TabContainer/Video/VBoxContainer/VSync" index="0"]
+text = "VSync"
 
 [node name="Audio" type="MarginContainer" parent="VBoxContainer/TabContainer"]
 visible = false
@@ -69,8 +74,9 @@ layout_mode = 2
 
 [node name="MainVolume" parent="VBoxContainer/TabContainer/Audio/VBoxContainer" instance=ExtResource("3_d262b")]
 layout_mode = 2
-title = "Volume"
-max_value = 100.0
+
+[node name="Label" parent="VBoxContainer/TabContainer/Audio/VBoxContainer/MainVolume" index="0"]
+text = "Volume"
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer/TabContainer/Audio/VBoxContainer"]
 layout_mode = 2
@@ -78,18 +84,17 @@ theme = ExtResource("4_kafsc")
 
 [node name="UIVolume" parent="VBoxContainer/TabContainer/Audio/VBoxContainer" instance=ExtResource("3_d262b")]
 layout_mode = 2
-title = "UI Volume"
-max_value = 100.0
-step = 1.0
+
+[node name="Label" parent="VBoxContainer/TabContainer/Audio/VBoxContainer/UIVolume" index="0"]
+text = "UI Volume"
 
 [node name="BGVolume" parent="VBoxContainer/TabContainer/Audio/VBoxContainer" instance=ExtResource("3_d262b")]
 layout_mode = 2
-title = "BG Volume"
-max_value = 100.0
-step = 1.0
+
+[node name="Label" parent="VBoxContainer/TabContainer/Audio/VBoxContainer/BGVolume" index="0"]
+text = "BG Volume"
 
 [node name="Controls" type="MarginContainer" parent="VBoxContainer/TabContainer"]
-visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
@@ -101,18 +106,33 @@ layout_mode = 2
 
 [node name="MouseSensitivity" parent="VBoxContainer/TabContainer/Controls/VBoxContainer" instance=ExtResource("3_d262b")]
 layout_mode = 2
-title = "Mouse Sensitivity"
+
+[node name="Label" parent="VBoxContainer/TabContainer/Controls/VBoxContainer/MouseSensitivity" index="0"]
+text = "Mouse Sensitivity"
+
+[node name="HSlider" parent="VBoxContainer/TabContainer/Controls/VBoxContainer/MouseSensitivity" index="1"]
 max_value = 0.3
 step = 0.01
 
 [node name="StickSensitivity" parent="VBoxContainer/TabContainer/Controls/VBoxContainer" instance=ExtResource("3_d262b")]
 layout_mode = 2
-title = "Stick Sensitivity"
+
+[node name="Label" parent="VBoxContainer/TabContainer/Controls/VBoxContainer/StickSensitivity" index="0"]
+text = "Stick Sensitivity"
+
+[node name="HSlider" parent="VBoxContainer/TabContainer/Controls/VBoxContainer/StickSensitivity" index="1"]
 max_value = 300.0
-step = 1.0
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Close" to="." method="_on_close_pressed"]
 [connection signal="toggled" from="VBoxContainer/TabContainer/Video/VBoxContainer/Fullscreen" to="." method="_on_fullscreen_toggled"]
 [connection signal="toggled" from="VBoxContainer/TabContainer/Video/VBoxContainer/VSync" to="." method="_on_vsync_toggled"]
 [connection signal="value_changed" from="VBoxContainer/TabContainer/Controls/VBoxContainer/MouseSensitivity" to="." method="_on_mouse_sensitivity_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/TabContainer/Controls/VBoxContainer/StickSensitivity" to="." method="_on_stick_sensitivity_value_changed"]
+
+[editable path="VBoxContainer/TabContainer/Video/VBoxContainer/Fullscreen"]
+[editable path="VBoxContainer/TabContainer/Video/VBoxContainer/VSync"]
+[editable path="VBoxContainer/TabContainer/Audio/VBoxContainer/MainVolume"]
+[editable path="VBoxContainer/TabContainer/Audio/VBoxContainer/UIVolume"]
+[editable path="VBoxContainer/TabContainer/Audio/VBoxContainer/BGVolume"]
+[editable path="VBoxContainer/TabContainer/Controls/VBoxContainer/MouseSensitivity"]
+[editable path="VBoxContainer/TabContainer/Controls/VBoxContainer/StickSensitivity"]
