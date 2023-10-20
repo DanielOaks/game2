@@ -1,36 +1,37 @@
-[gd_scene load_steps=9 format=3 uid="uid://dgxs1dicyafcn"]
+[gd_scene load_steps=11 format=3 uid="uid://dgxs1dicyafcn"]
 
 [ext_resource type="Script" path="res://scenes/characters/AlertBot.gd" id="1_c7j12"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="2_jep6e"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="3_qgjlb"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_g5hnq"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="5_v72qy"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_pqtnw"]
-height = 1.4
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xf7v6"]
-albedo_color = Color(0.815686, 0.368627, 0.376471, 1)
-roughness = 0.65
+[ext_resource type="PackedScene" uid="uid://bs011vve4n2ak" path="res://assets/game2/models/AlertBot.blend" id="6_c25qd"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="7_7nal1"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sg2u0"]
 height = 1.4
 
+[sub_resource type="TorusMesh" id="TorusMesh_pfw0j"]
+inner_radius = 0.1
+outer_radius = 0.3
+rings = 16
+ring_segments = 12
+
+[sub_resource type="Curve" id="Curve_df6wl"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.494505), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [node name="AlertBot" type="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.346689, 0)
 script = ExtResource("1_c7j12")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
-mesh = SubResource("CapsuleMesh_pqtnw")
-surface_material_override/0 = SubResource("StandardMaterial3D_xf7v6")
+[node name="Model" parent="." instance=ExtResource("6_c25qd")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.01, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 shape = SubResource("CapsuleShape3D_sg2u0")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
-path_height_offset = 0.7
 
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("2_jep6e")
@@ -45,8 +46,51 @@ initial_state = NodePath("Wandering")
 [node name="StaringAtTarget" type="Node" parent="StateChart/ParallelState/CompoundState"]
 script = ExtResource("5_v72qy")
 
+[node name="ToSearching" type="Node" parent="StateChart/ParallelState/CompoundState/StaringAtTarget"]
+script = ExtResource("7_7nal1")
+to = NodePath("../../Searching")
+event = &"cannot see player"
+
+[node name="ToStaring" type="Node" parent="StateChart/ParallelState/CompoundState/StaringAtTarget"]
+script = ExtResource("7_7nal1")
+to = NodePath("..")
+event = &"sees player"
+
 [node name="Searching" type="Node" parent="StateChart/ParallelState/CompoundState"]
 script = ExtResource("5_v72qy")
 
+[node name="ToStaring" type="Node" parent="StateChart/ParallelState/CompoundState/Searching"]
+script = ExtResource("7_7nal1")
+to = NodePath("../../StaringAtTarget")
+event = &"sees player"
+
+[node name="ToWandering" type="Node" parent="StateChart/ParallelState/CompoundState/Searching"]
+script = ExtResource("7_7nal1")
+to = NodePath("../../Wandering")
+delay_seconds = 2.5
+
 [node name="Wandering" type="Node" parent="StateChart/ParallelState/CompoundState"]
 script = ExtResource("5_v72qy")
+
+[node name="ToStaring" type="Node" parent="StateChart/ParallelState/CompoundState/Wandering"]
+script = ExtResource("7_7nal1")
+to = NodePath("../../StaringAtTarget")
+event = &"sees player"
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, -1.79107e-08, -3.83791e-09, 1.79107e-08, 0.912199, 0.409748, -3.83792e-09, -0.409748, 0.912199, 0, 1.01, -0.457156)
+light_color = Color(0.968627, 0.772549, 0.788235, 1)
+light_energy = 100.0
+spot_angle = 18.839
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+amount = 5
+randomness = 0.12
+mesh = SubResource("TorusMesh_pfw0j")
+emission_shape = 2
+emission_sphere_radius = 0.05
+gravity = Vector3(0, -0.5, 0)
+scale_amount_curve = SubResource("Curve_df6wl")
+
+[connection signal="state_processing" from="StateChart/ParallelState/CompoundState/StaringAtTarget" to="." method="_on_staring_at_target_processing"]
+[connection signal="state_processing" from="StateChart/ParallelState/CompoundState/Wandering" to="." method="_on_wandering_processing"]

@@ -187,17 +187,18 @@ transform = Transform3D(0.279075, 0, -0.960269, 0, 1, 0, 0.960269, 0, 0.279075, 
 [node name="UI" parent="." instance=ExtResource("3_fwefr")]
 
 [node name="AlertBot" parent="." node_paths=PackedStringArray("target") instance=ExtResource("5_kmb22")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.306397, 0)
 target = NodePath("../Player")
 wander_distance = 4.0
 
 [node name="AlertBot2" parent="." node_paths=PackedStringArray("target") instance=ExtResource("5_kmb22")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.7713, 18.4791, 7.37618)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.7713, 18.8341, 7.37618)
 target = NodePath("../Player")
 wander_distance = 30.0
 refresh_wander_target_seconds = 10.0
 
 [node name="AlertBot4" parent="." node_paths=PackedStringArray("target") instance=ExtResource("5_kmb22")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.17957, 12.4402, -20.9958)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.17957, 12.4828, -20.9958)
 target = NodePath("../Player")
 wander_distance = 30.0
 refresh_wander_target_seconds = 8.6

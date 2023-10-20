@@ -1,7 +1,10 @@
 extends CharacterBody3D
 
+@onready var state: StateChart = $StateChart
+
 @export var target: Node3D = null
 var wander_target: Vector3 = Vector3.ZERO
+var look_at_target: Vector3 = Vector3.ZERO
 
 ## How far away to wander, in units.
 @export var wander_distance: float = 10
@@ -16,6 +19,8 @@ var next_wander_target_refresh: float = 0
 @onready var nav: NavigationAgent3D = $NavigationAgent3D
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+
+var can_reach_player := false
 
 func _ready():
 	#nav.debug_enabled = true
@@ -33,9 +38,7 @@ func xy(vec: Vector3) -> Vector2:
 	return Vector2(vec.x, vec.y)
 
 func _physics_process(delta):
-	# Add the gravity.
-	if not is_on_floor():
-		velocity.y -= gravity * delta
+	var look_target_this_frame: Vector3 = target.position
 	
 	# refresh wander target
 	next_wander_target_refresh -= delta
@@ -51,6 +54,9 @@ func _physics_process(delta):
 		wander_target = position
 		wander_target.x += wander_dir.x
 		wander_target.y += wander_dir.y
+		look_at_target = position
+		look_at_target.x += wander_dir.x * 2
+		look_at_target.y += wander_dir.y * 2
 	
 	# only do navigation if the nav server is ready to give us directions!
 	# see the godot docs for NavigationServer timing and physics frames
@@ -59,11 +65,21 @@ func _physics_process(delta):
 	# move towards the target
 	nav.target_position = target.position
 	
-	if do_nav_this_frame and not nav.is_target_reachable():
+	if do_nav_this_frame and nav.is_target_reachable():
+		# going towards player
+		if not can_reach_player:
+			can_reach_player = true
+			state.send_event("sees player")
+	elif do_nav_this_frame and not nav.is_target_reachable():
 		# or towards our wander target
+		if can_reach_player:
+			can_reach_player = false
+			state.send_event("cannot see player")
+		
 		nav.target_position = wander_target
+		look_target_this_frame = look_at_target
 
-	if do_nav_this_frame and xy(position).distance_to(xy(nav.target_position)) > .1:
+	if do_nav_this_frame:
 		var direction = Vector3()
 		direction = nav.get_next_path_position() - global_position
 		direction = direction.normalized()
@@ -73,4 +89,14 @@ func _physics_process(delta):
 		# stop moving
 		velocity = velocity.lerp(Vector3.ZERO, accel * delta)
 	
+	# rotate towards the nav target
+	look_target_this_frame.y = position.y
+	look_at(look_target_this_frame)
+	
 	move_and_slide()
+
+func _on_staring_at_target_processing(_delta):
+	$SpotLight3D.light_color = "#FF0000"
+
+func _on_wandering_processing(_delta):
+	$SpotLight3D.light_color = "#FFFFFF"
