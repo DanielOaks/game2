@@ -52,13 +52,18 @@ func _physics_process(delta):
 		wander_target.x += wander_dir.x
 		wander_target.y += wander_dir.y
 	
+	# only do navigation if the nav server is ready to give us directions!
+	# see the godot docs for NavigationServer timing and physics frames
+	var do_nav_this_frame = not (nav.target_position == Vector3.ZERO)
+	
 	# move towards the target
 	nav.target_position = target.position
-	if not nav.is_target_reachable():
+	
+	if do_nav_this_frame and not nav.is_target_reachable():
 		# or towards our wander target
 		nav.target_position = wander_target
 
-	if xy(position).distance_to(xy(nav.target_position)) > .1:
+	if do_nav_this_frame and xy(position).distance_to(xy(nav.target_position)) > .1:
 		var direction = Vector3()
 		direction = nav.get_next_path_position() - global_position
 		direction = direction.normalized()

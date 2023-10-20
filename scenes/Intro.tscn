@@ -652,10 +652,10 @@ tracks/1/path = NodePath("CanvasLayer/FadeInOut:color")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": []
+"values": [Color(0, 0, 0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_7k7it"]
@@ -758,6 +758,7 @@ layer_1/modulate = Color(1, 1, 1, 1)
 layer_1/y_sort_enabled = false
 layer_1/y_sort_origin = 0
 layer_1/z_index = 1
+layer_1/navigation_enabled = true
 layer_1/tile_data = PackedInt32Array(-2, 1245186, 6, -1, 1310722, 6, -65536, 1376258, 6, -196608, 1376258, 4, -196607, 1441794, 4, -131071, 1441794, 5, -65535, 1441794, 6, -196606, 1507330, 4, -131070, 1507330, 5, -65534, 1507330, 6, -196605, 1572866, 4, -131069, 1572866, 5, -65533, 1572866, 6, -131063, 1703938, 5, -131057, 1703938, 5, -131051, 1703938, 5, -131045, 1703938, 5)
 
 [node name="BG light 1" type="PointLight2D" parent="StuffInScene"]
@@ -942,7 +943,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.027451, 0.0470588, 0.105882, 0)
+color = Color(0, 0, 0, 0)
 
 [connection signal="body_entered" from="StuffInScene/FadeOutCollider" to="." method="_on_fade_out_collider_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
