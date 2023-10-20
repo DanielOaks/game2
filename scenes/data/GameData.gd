@@ -63,6 +63,17 @@ func set_vsync_mode(enable: bool):
 	else:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 
+signal fog_type_updated
+enum FogType {HQ = 2, NORMAL = 1, LQ = 0}
+
+var fog_type: FogType :
+	get:
+		return _config.get_value("video", "fog_type", FogType.HQ)
+	set(value):
+		_config.set_value("video", "fog_type", value)
+		_config.save(_config_path)
+		emit_signal("fog_type_updated", value)
+
 var game_volume: float :
 	get:
 		return _config.get_value("audio", "volume", 100.0)

@@ -3,6 +3,7 @@ extends Panel
 @onready var game_data: GameData = get_node("/root/GameData")
 @onready var fullscreen = $VBoxContainer/TabContainer/Video/VBoxContainer/Fullscreen
 @onready var vsync = $VBoxContainer/TabContainer/Video/VBoxContainer/VSync
+@onready var fog = $VBoxContainer/TabContainer/Video/VBoxContainer/Fog
 @onready var main_volume = $VBoxContainer/TabContainer/Audio/VBoxContainer/MainVolume
 @onready var ui_volume = $VBoxContainer/TabContainer/Audio/VBoxContainer/UIVolume
 @onready var bg_volume = $VBoxContainer/TabContainer/Audio/VBoxContainer/BGVolume
@@ -17,6 +18,7 @@ func _on_close_pressed():
 func _ready():
 	fullscreen.set_default_value(game_data.fullscreen)
 	vsync.set_default_value(game_data.vsync)
+	fog.set_default_value(game_data.fog_type)
 	
 	main_volume.set_default_value(game_data.game_volume)
 	ui_volume.set_default_value(game_data.ui_volume)
@@ -33,6 +35,8 @@ func _on_fullscreen_toggled(is_button_pressed: bool):
 func _on_vsync_toggled(is_button_pressed):
 	game_data.vsync = is_button_pressed
 
+func _on_fog_item_selected(index, text):
+	game_data.fog_type = index
 
 # Audio
 
