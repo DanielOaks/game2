@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="TitleImage" load_steps=3 format=3 uid="uid://do0u6lgt7posy"]
+
+[ext_resource type="Script" path="res://assets/game2/title-images/TitleImage.gd" id="1_kon80"]
+[ext_resource type="Texture2D" uid="uid://bshwcsy2plkjg" path="res://assets/game2/title-images/wordart-10.png" id="2_m7oj6"]
+
+[resource]
+script = ExtResource("1_kon80")
+texture = ExtResource("2_m7oj6")
+background = Color(0.407843, 0.470588, 0.290196, 1)

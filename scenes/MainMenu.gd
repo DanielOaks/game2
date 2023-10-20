@@ -1,5 +1,18 @@
 extends Control
 
+@export var title_images: Array[TitleImage] = [
+	load("res://assets/game2/title-images/wordart-1.tres"),
+	load("res://assets/game2/title-images/wordart-2.tres"),
+	load("res://assets/game2/title-images/wordart-3.tres"),
+	load("res://assets/game2/title-images/wordart-4.tres"),
+	load("res://assets/game2/title-images/wordart-5.tres"),
+	load("res://assets/game2/title-images/wordart-6.tres"),
+	load("res://assets/game2/title-images/wordart-7.tres"),
+	load("res://assets/game2/title-images/wordart-8.tres"),
+	load("res://assets/game2/title-images/wordart-9.tres"),
+	load("res://assets/game2/title-images/wordart-10.tres"),
+]
+
 @onready var game_data: GameData = get_node("/root/GameData")
 
 func _on_menu_actioned(action: String):
@@ -10,31 +23,13 @@ func _on_menu_actioned(action: String):
 	
 	if action == "quit": get_tree().quit()
 
-func get_all_file_paths(path):
-	# ew. is there a path.join kind of function? this will break if the path doesn't have a '/' at the end :pensive:
-	
-	var paths = []
-	
-	var dir = DirAccess.open(path)
-	dir.list_dir_begin()
-	
-	var file_name = dir.get_next()
-	while file_name != "":
-		if dir.current_is_dir() or file_name.ends_with(".import"):
-			pass
-		else:
-			paths.append(path + file_name)
-		file_name = dir.get_next()
-
-	return paths
-
 # get random title image
 func new_title_image():
-	var image_paths = get_all_file_paths("res://images/title-images/")
-	var texture = load(image_paths.pick_random())
+	var ti: TitleImage = title_images.pick_random()
 	
 	var title = get_node("MarginContainer/VBoxContainer/title") as TextureRect
-	title.texture = texture
+	title.texture = ti.texture
+	$BgColorRect.color = ti.background
 
 func _process(_delta):
 	if Input.is_action_just_pressed("secret_1"):

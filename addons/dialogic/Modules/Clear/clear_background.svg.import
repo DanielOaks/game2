@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://kv3ay1ytxs2e"
-path="res://.godot/imported/wordart-8.png-948fb0885d0d652a6be9d4d57ab1a877.ctex"
+uid="uid://brc74uf1yvlfr"
+path="res://.godot/imported/clear_background.svg-32f657ae646e5867a8ceb0543ae207de.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/title-images/wordart-8.png"
-dest_files=["res://.godot/imported/wordart-8.png-948fb0885d0d652a6be9d4d57ab1a877.ctex"]
+source_file="res://addons/dialogic/Modules/Clear/clear_background.svg"
+dest_files=["res://.godot/imported/clear_background.svg-32f657ae646e5867a8ceb0543ae207de.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

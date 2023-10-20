@@ -80,6 +80,9 @@ func _ready():
 	if Engine.is_editor_hint():
 		resized.connect(_update_debug_origin)
 		
+		if !ProjectSettings.get_setting('dialogic/portraits/default_portrait', '').is_empty():
+			default_portrait_scene = ProjectSettings.get_setting('dialogic/portraits/default_portrait', '')
+		
 		debug_origin = Sprite2D.new()
 		add_child(debug_origin)
 		debug_origin.texture = get_theme_icon("EditorPosition", "EditorIcons")
@@ -121,7 +124,7 @@ func get_local_portrait_transform(portrait_rect:Rect2, character_scale:=1.0) -> 
 	# Mode that size the character so 100% size fills the height
 	elif size_mode == SizeModes.FIT_SCALE_HEIGHT:
 		transform.size = Vector2(1,1) * size.y/portrait_rect.size.y*character_scale
-		
+	
 	return transform
 
 
@@ -142,10 +145,11 @@ func _update_debug_portrait_scene() -> void:
 		for child in get_children():
 			if child != debug_origin:
 				child.free()
-
+	
 	var character := _get_debug_character()
 	if not character is DialogicCharacter or character.portraits.is_empty():
 		return
+	
 	var debug_portrait := debug_character_portrait
 	if debug_portrait.is_empty(): debug_portrait = character.default_portrait
 	if mode == PositionModes.SPEAKER and !portrait_prefix.is_empty():

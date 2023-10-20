@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3b4vlga8svrv"
-path="res://.godot/imported/wordart-1.png-4852664fc638db4a5f662a4c809e3c99.ctex"
+uid="uid://bshwcsy2plkjg"
+path="res://.godot/imported/wordart-10.png-9e1ec46f5717700e0e2221d222258bcf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/title-images/wordart-1.png"
-dest_files=["res://.godot/imported/wordart-1.png-4852664fc638db4a5f662a4c809e3c99.ctex"]
+source_file="res://assets/game2/title-images/wordart-10.png"
+dest_files=["res://.godot/imported/wordart-10.png-9e1ec46f5717700e0e2221d222258bcf.ctex"]
 
 [params]
 

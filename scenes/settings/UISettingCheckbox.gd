@@ -15,14 +15,12 @@ func _on_check_box_toggled(button_pressed: bool) -> void:
 	emit_signal("toggled", button_pressed)
 
 # pass through title
-@export var title := "" :
-	get:
-		return title
-
-	set (value):
-		# Wait until the scene is ready if `label` is null.
-		if not label:
-			await ready
-
-		label.text = value
-		title = value
+@export var title: String # :
+#	set (value):
+#		print_debug("Title to set is: ", value)
+#
+#		if not is_node_ready():
+#			await ready
+#
+#		label.text = value
+#		title = value

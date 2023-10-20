@@ -125,24 +125,19 @@ func handle_event(event_index:int) -> void:
 		await dialogic_resumed
 
 	if event_index >= len(current_timeline_events):
-		if has_subsystem('Jump') and !self.Jump.is_jump_stack_empty():
-			self.Jump.resume_from_last_jump()
-			return
-		else:
-			end_timeline()
-			return
-
+		end_timeline()
+		return
+	
 	#actually process the event now, since we didnt earlier at runtime
 	#this needs to happen before we create the copy DialogicEvent variable, so it doesn't throw an error if not ready
 	if current_timeline_events[event_index]['event_node_ready'] == false:
 		current_timeline_events[event_index]._load_from_string(current_timeline_events[event_index]['event_node_as_text'])
-
+	
 	current_event_idx = event_index
-
-	if current_timeline_events[event_index].continue_at_end:
-		if not current_timeline_events[event_index].event_finished.is_connected(handle_next_event):
-			current_timeline_events[event_index].event_finished.connect(handle_next_event, CONNECT_ONE_SHOT)
-
+	
+	if not current_timeline_events[event_index].event_finished.is_connected(handle_next_event):
+		current_timeline_events[event_index].event_finished.connect(handle_next_event, CONNECT_ONE_SHOT)
+	
 	current_timeline_events[event_index].execute(self)
 	event_handled.emit(current_timeline_events[event_index])
 
@@ -197,6 +192,8 @@ func collect_subsystems() -> void:
 		
 		# build event cache
 		for event in indexer._get_events():
+			if not FileAccess.file_exists(event):
+				continue
 			if not 'event_end_branch.gd' in event and not 'event_text.gd' in event:
 				_event_script_cache.append(load(event).new())
 		

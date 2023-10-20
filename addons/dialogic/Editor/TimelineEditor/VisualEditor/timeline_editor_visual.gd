@@ -311,8 +311,10 @@ func _on_timeline_area_drag_completed(type:int, index:int, data:Variant) -> void
 		TimelineUndoRedo.commit_action()
 	
 	elif type == %TimelineArea.DragTypes.EXISTING_EVENTS:
-		move_blocks_to_index(data, index)
+		if not (len(data) == 1 and data[0].get_index()+1 == index):
+			move_blocks_to_index(data, index)
 	
+	await get_tree().process_frame
 	something_changed()
 	scroll_to_piece(index)
 	indent_events()
@@ -477,6 +479,8 @@ func delete_events_indexed(indexed_events:Dictionary) -> void:
 		if 'end_node' in %Timeline.get_child(idx-idx_shift) and %Timeline.get_child(idx-idx_shift).end_node != null and is_instance_valid(%Timeline.get_child(idx-idx_shift).end_node):
 			%Timeline.get_child(idx-idx_shift).end_node.parent_node = null
 		if %Timeline.get_child(idx-idx_shift) != null and is_instance_valid(%Timeline.get_child(idx-idx_shift)):
+			if %Timeline.get_child(idx-idx_shift) in selected_items:
+				selected_items.erase(%Timeline.get_child(idx-idx_shift))
 			%Timeline.get_child(idx-idx_shift).queue_free()
 			%Timeline.get_child(idx-idx_shift).get_parent().remove_child(%Timeline.get_child(idx-idx_shift))
 			idx_shift += 1
@@ -880,13 +884,16 @@ func _on_event_popup_menu_index_pressed(index:int) -> void:
 	if index == 0:
 		if not item.resource.help_page_path.is_empty():
 			OS.shell_open(item.resource.help_page_path)
-	elif index == 2 or index == 3:
-		if index == 2:
+	elif index == 1:
+		find_parent('EditorView').plugin_reference.get_editor_interface().set_main_screen_editor('Script')
+		find_parent('EditorView').plugin_reference.get_editor_interface().edit_script(item.resource.get_script(), 1, 1)
+	elif index == 3 or index == 4:
+		if index == 3:
 			offset_blocks_by_index(selected_items, -1)
 		else:
 			offset_blocks_by_index(selected_items, +1)
 
-	elif index == 5:
+	elif index == 6:
 		var events_indexed := get_events_indexed([item])
 		TimelineUndoRedo.create_action("[D] Deleting 1 event.")
 		TimelineUndoRedo.add_do_method(delete_events_indexed.bind(events_indexed))

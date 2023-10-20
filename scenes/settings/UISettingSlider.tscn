@@ -12,6 +12,8 @@ script = ExtResource("1_ebd5d")
 [node name="Label" type="Label" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("2_v2n6f")
+text = "Label text"
 
 [node name="HSlider" type="HSlider" parent="."]
 layout_mode = 2

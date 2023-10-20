@@ -61,8 +61,8 @@ func _get_icon() -> Resource:
 ################################################################################
 
 func to_text() -> String:
-	var string := "Setting "
-	if mode == Modes.RESET:
+	var string := "setting "
+	if mode != Modes.SET:
 		string += "reset "
 	
 	if !name.is_empty() and mode != Modes.RESET_ALL:
@@ -84,7 +84,7 @@ func to_text() -> String:
 
 func from_text(string:String) -> void:
 	var reg := RegEx.new()
-	reg.compile('Setting (?<reset>reset)? *("(?<name>[^=+\\-*\\/]*)")?( *= *(?<value>.*))?')
+	reg.compile('setting (?<reset>reset)? *("(?<name>[^=+\\-*\\/]*)")?( *= *(?<value>.*))?')
 	var result := reg.search(string)
 	if !result:
 		return
@@ -114,7 +114,7 @@ func from_text(string:String) -> void:
 
 
 func is_valid_event(string:String) -> bool:
-	return string.begins_with('Setting')
+	return string.begins_with('setting')
 
 
 ################################################################################
@@ -122,7 +122,7 @@ func is_valid_event(string:String) -> bool:
 ################################################################################
 
 func build_event_editor():
-	add_header_edit('mode', ValueType.FIXED_OPTION_SELECTOR, '', '', {
+	add_header_edit('mode', ValueType.FIXED_OPTION_SELECTOR, {
 		'selector_options': [{
 				'label': 'Set',
 				'value': Modes.SET,
@@ -138,8 +138,8 @@ func build_event_editor():
 			},
 			]})
 	
-	add_header_edit('name', ValueType.COMPLEX_PICKER, '', '', {'placeholder':'Type setting', 'suggestions_func':get_settings_suggestions}, 'mode != 2')
-	add_header_edit('_value_type', ValueType.FIXED_OPTION_SELECTOR, 'to', '', {
+	add_header_edit('name', ValueType.COMPLEX_PICKER, {'placeholder':'Type setting', 'suggestions_func':get_settings_suggestions}, 'mode != 2')
+	add_header_edit('_value_type', ValueType.FIXED_OPTION_SELECTOR, {'left_text':'to',
 		'selector_options': [
 			{
 				'label': 'String',
@@ -160,9 +160,9 @@ func build_event_editor():
 			}],
 		'symbol_only':true}, 
 		'!name.is_empty() and mode == 0')
-	add_header_edit('value', ValueType.SINGLELINE_TEXT, '', '', {}, '!name.is_empty() and (_value_type == 0 or _value_type == 3) and mode == 0')
-	add_header_edit('value', ValueType.FLOAT, '', '', {}, '!name.is_empty()  and _value_type == 1 and mode == 0')
-	add_header_edit('value', ValueType.COMPLEX_PICKER, '', '', 
+	add_header_edit('value', ValueType.SINGLELINE_TEXT, {}, '!name.is_empty() and (_value_type == 0 or _value_type == 3) and mode == 0')
+	add_header_edit('value', ValueType.FLOAT, {}, '!name.is_empty()  and _value_type == 1 and mode == 0')
+	add_header_edit('value', ValueType.COMPLEX_PICKER, 
 			{'suggestions_func' : get_value_suggestions, 'placeholder':'Select Variable'}, 
 			'!name.is_empty() and _value_type == 2 and mode == 0')
 
@@ -192,9 +192,9 @@ func get_value_suggestions(filter:String) -> Dictionary:
 func _get_code_completion(CodeCompletionHelper:Node, TextNode:TextEdit, line:String, word:String, symbol:String) -> void:
 	if symbol == " " and !"reset" in line and !'=' in line and !'"' in line:
 		TextNode.add_code_completion_option(CodeEdit.KIND_MEMBER, "reset", "reset ", event_color.lerp(TextNode.syntax_highlighter.normal_color, 0.5), TextNode.get_theme_icon("RotateLeft", "EditorIcons"))
-		TextNode.add_code_completion_option(CodeEdit.KIND_MEMBER, "reset all", "reset\n", event_color.lerp(TextNode.syntax_highlighter.normal_color, 0.5), TextNode.get_theme_icon("ToolRotate", "EditorIcons"))
+		TextNode.add_code_completion_option(CodeEdit.KIND_MEMBER, "reset all", "reset \n", event_color.lerp(TextNode.syntax_highlighter.normal_color, 0.5), TextNode.get_theme_icon("ToolRotate", "EditorIcons"))
 	
-	if (symbol == " " or symbol == '"') and !"=" in line:
+	if (symbol == " " or symbol == '"') and !"=" in line and CodeCompletionHelper.get_line_untill_caret(line).count('"') != 2:
 		for i in get_settings_suggestions(''):
 			if i.is_empty():
 				continue
@@ -205,14 +205,14 @@ func _get_code_completion(CodeCompletionHelper:Node, TextNode:TextEdit, line:Str
 
 
 func _get_start_code_completion(CodeCompletionHelper:Node, TextNode:TextEdit) -> void:
-	TextNode.add_code_completion_option(CodeEdit.KIND_PLAIN_TEXT, 'Setting', 'Setting ', event_color)
+	TextNode.add_code_completion_option(CodeEdit.KIND_PLAIN_TEXT, 'setting', 'setting ', event_color)
 
 #################### SYNTAX HIGHLIGHTING #######################################
 ################################################################################
 
 func _get_syntax_highlighting(Highlighter:SyntaxHighlighter, dict:Dictionary, line:String) -> Dictionary:
-	dict[line.find('Setting')] = {"color":event_color}
-	dict[line.find('Setting')+7] = {"color":Highlighter.normal_color}
+	dict[line.find('setting')] = {"color":event_color}
+	dict[line.find('setting')+7] = {"color":Highlighter.normal_color}
 	dict = Highlighter.color_word(dict, event_color, line, 'reset')
 	dict = Highlighter.color_region(dict, Highlighter.string_color, line, '"', '"')
 	dict = Highlighter.color_region(dict, Highlighter.variable_color, line, '{', '}')
