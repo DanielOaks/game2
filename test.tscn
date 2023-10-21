@@ -1,0 +1,63 @@
+[gd_scene load_steps=5 format=3 uid="uid://cvw5kfdc3do03"]
+
+[ext_resource type="Script" path="res://scenes/usable/ShowableNode3D.gd" id="1_3o4k0"]
+[ext_resource type="Script" path="res://test.gd" id="1_l5jfb"]
+
+[sub_resource type="Animation" id="Animation_knl22"]
+resource_name = "start"
+length = 5.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.7, 1.3),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"show_item"
+}, {
+"args": [],
+"method": &"show_item"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CSGBox3D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.7, 2.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dh116"]
+_data = {
+"start": SubResource("Animation_knl22")
+}
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_l5jfb")
+
+[node name="Label3D" type="Label3D" parent="."]
+visible = false
+text = "teststst"
+script = ExtResource("1_3o4k0")
+shown_for_seconds = 1.5
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.98373)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.190154, 0)
+size = Vector3(1, 0.0776367, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_dh116")
+}
