@@ -30,4 +30,4 @@ func fade_out_music():
 	background_music.fade_out(3)
 
 func next_scene():
-	get_tree().change_scene_to_file("res://scenes/ExampleFirstPerson.tscn")
+	get_tree().change_scene_to_file("res://scenes/DystopiaFirstPerson.tscn")
