@@ -15,10 +15,10 @@
 - https://freesound.org/people/Kronek9/sounds/702660/
 - Sonniss.com - GDC 2018 - Game Audio Bundle - George Karagioules - The Source. Ambiences from Athens - Athens. Plaka Street. Slow Rain
 
-
 ## Addons
 
 - Godot State Charts: https://godotengine.org/asset-library/asset/1778
+- Dialogic
 
 ## Tutorials
 

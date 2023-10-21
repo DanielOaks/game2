@@ -1,0 +1,103 @@
+[gd_scene load_steps=13 format=3 uid="uid://cxbud66y1cioj"]
+
+[ext_resource type="PackedScene" uid="uid://di87p1t80gp3y" path="res://scenes/Characters/PlayerFP.tscn" id="6_gbipr"]
+[ext_resource type="PackedScene" uid="uid://dqov77x6i66vu" path="res://scenes/overlays/UI2DS.tscn" id="7_0n07h"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_62k5k"]
+albedo_color = Color(0.878431, 0.878431, 0.878431, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_3mww2"]
+material = SubResource("StandardMaterial3D_62k5k")
+radial_segments = 8
+rings = 8
+
+[sub_resource type="Curve" id="Curve_ewlcn"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0842697, 1), 0.0, 0.0, 0, 0, Vector2(0.533708, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_yyx2b"]
+offsets = PackedFloat32Array(0.0564263, 0.974922)
+colors = PackedColorArray(0.00514083, 0.0656177, 0.109212, 1, 0.985333, 0.968074, 0.930993, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fjd74"]
+gradient = SubResource("Gradient_yyx2b")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_03ysg"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2lip6"]
+width = 256
+seamless = true
+noise = SubResource("FastNoiseLite_03ysg")
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_gxapq"]
+panorama = SubResource("NoiseTexture2D_2lip6")
+
+[sub_resource type="Sky" id="Sky_xedda"]
+sky_material = SubResource("PanoramaSkyMaterial_gxapq")
+
+[sub_resource type="Environment" id="Environment_4p115"]
+background_mode = 2
+sky = SubResource("Sky_xedda")
+ambient_light_source = 2
+ambient_light_color = Color(0.427451, 0.423529, 0.568627, 1)
+ambient_light_energy = 0.6
+tonemap_mode = 2
+tonemap_exposure = 0.41
+tonemap_white = 1.52
+ssao_enabled = true
+ssil_radius = 6.1
+ssil_intensity = 0.93
+glow_enabled = true
+fog_light_energy = 0.5
+adjustment_enabled = true
+adjustment_color_correction = SubResource("GradientTexture1D_fjd74")
+
+[node name="CloudyFirstPerson" type="Node3D"]
+
+[node name="stage" type="Node3D" parent="."]
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+use_collision = true
+radius = 20.0
+height = 1.0
+sides = 16
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.47537, 0)
+visible = false
+use_collision = true
+flip_faces = true
+radius = 19.6458
+height = 10.4452
+sides = 16
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.7441, 0)
+amount = 30
+lifetime = 9.0
+mesh = SubResource("SphereMesh_3mww2")
+emission_shape = 3
+emission_box_extents = Vector3(50, 2, 50)
+gravity = Vector3(2, 0, 1)
+scale_amount_curve = SubResource("Curve_ewlcn")
+
+[node name="env" type="Node3D" parent="."]
+
+[node name="SunLight" type="DirectionalLight3D" parent="env"]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 6.49624, 3.34628, 1.20487)
+light_color = Color(1, 0.92549, 0.831373, 1)
+light_energy = 5.36
+light_bake_mode = 1
+shadow_enabled = true
+directional_shadow_mode = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="env"]
+environment = SubResource("Environment_4p115")
+
+[node name="Player" parent="." instance=ExtResource("6_gbipr")]
+transform = Transform3D(0.279075, 0, -0.960269, 0, 1, 0, 0.960269, 0, 0.279075, 0, 0, 0)
+
+[node name="BakedLightmap" type="LightmapGI" parent="."]
+
+[node name="UI" parent="." instance=ExtResource("7_0n07h")]
