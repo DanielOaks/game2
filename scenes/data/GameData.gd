@@ -6,6 +6,8 @@ var trackingTotalPlaytime := false
 var totalPlaytimeInSeconds: float = 0
 var resetGameAfterSeconds: float = 60 * 4
 
+var invertYInput := false
+
 ## shared
 
 func _ready():
@@ -33,6 +35,9 @@ func _process(delta):
 		totalPlaytimeInSeconds += delta
 
 	# inputs
+	if Input.is_action_just_pressed("toggle_invert_y"):
+		invertYInput = !invertYInput
+
 	if Input.is_action_just_pressed("restart"):
 		get_tree().change_scene_to_file("res://scenes/MainMenu.tscn")
 

@@ -43,6 +43,9 @@ func _input(event):
 func _process(delta):
 	# look around based on right thumbstick
 	var look_dir = Input.get_vector("look_left", "look_right", "look_up", "look_down")
+	if game_data.invertYInput:
+		look_dir.y *= -1
+	
 	rotate_y(deg_to_rad(-look_dir.x * game_data.stick_sensitivity * delta))
 	$Head.rotate_x(deg_to_rad(-look_dir.y * game_data.stick_sensitivity * delta))
 	clamp_head_rotation()
