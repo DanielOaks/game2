@@ -80,4 +80,7 @@ func _on_exit_area_body_entered(body):
 	if body != $Player:
 		return
 
-	get_tree().change_scene_to_file("res://scenes/EuropeanPlumberSiblingSideScroll.tscn")
+	if randf() >= 0.5:
+		get_tree().change_scene_to_file("res://scenes/EuropeanPlumberSiblingSideScroll.tscn")
+	else:
+		get_tree().change_scene_to_file("res://scenes/ExampleSideScroll.tscn")

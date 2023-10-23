@@ -5,6 +5,9 @@ extends Node
 ## shared
 
 func _ready():
+	# initialise rng
+	randomize()
+	
 	# settings
 	var err = _config.load(_config_path)
 	if err != OK:
