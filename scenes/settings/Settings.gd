@@ -35,7 +35,7 @@ func _on_fullscreen_toggled(is_button_pressed: bool):
 func _on_vsync_toggled(is_button_pressed):
 	game_data.vsync = is_button_pressed
 
-func _on_fog_item_selected(index, text):
+func _on_fog_item_selected(index, _text):
 	game_data.fog_type = index
 
 # Audio

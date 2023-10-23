@@ -2,6 +2,10 @@
 # we do this in two separate sections, to make things easier to read
 extends Node
 
+var trackingTotalPlaytime := false
+var totalPlaytimeInSeconds: float = 0
+var resetGameAfterSeconds: float = 60 * 4
+
 ## shared
 
 func _ready():
@@ -23,7 +27,12 @@ func _ready():
 	# live game data
 	update_colours()
 
-func _process(_delta):
+func _process(delta):
+	# playtime
+	if trackingTotalPlaytime:
+		totalPlaytimeInSeconds += delta
+
+	# inputs
 	if Input.is_action_just_pressed("restart"):
 		get_tree().change_scene_to_file("res://scenes/MainMenu.tscn")
 
@@ -33,6 +42,17 @@ func _process(_delta):
 		next_vibe()
 	if Input.is_action_just_pressed("previous_vibe"):
 		prev_vibe()
+
+## Tracking game time
+func start_playtime():
+	trackingTotalPlaytime = true
+	totalPlaytimeInSeconds = 0
+
+func end_playtime():
+	trackingTotalPlaytime = false
+
+func should_reset_game():
+	return trackingTotalPlaytime and (totalPlaytimeInSeconds >= resetGameAfterSeconds)
 
 ## settings
 

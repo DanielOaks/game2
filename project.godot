@@ -14,7 +14,11 @@ config/name="Game 2"
 config/version="0.0.1"
 run/main_scene="res://scenes/MainMenu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://icon.png"
+
+[audio]
+
+driver/output_latency=20
 
 [autoload]
 

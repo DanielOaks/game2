@@ -93,12 +93,3 @@ emission_shape = 3
 emission_box_extents = Vector3(50, 2, 50)
 gravity = Vector3(2, 0, 1)
 scale_amount_curve = SubResource("Curve_ewlcn")
-
-[node name="ContainingCylinder3D" type="CSGCylinder3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.47537, 0)
-visible = false
-use_collision = true
-flip_faces = true
-radius = 19.6458
-height = 10.4452
-sides = 16
