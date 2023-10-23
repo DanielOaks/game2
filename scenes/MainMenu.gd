@@ -13,7 +13,10 @@ extends Control
 	load("res://assets/game2/title-images/wordart-10.tres"),
 ]
 
+@onready var background_music = get_node("/root/BackgroundMusic")
 @onready var game_data: GameData = get_node("/root/GameData")
+
+var bgMusic = preload("res://assets/game2/sound/MainBgLoop.ogg")
 
 func _on_menu_actioned(action: String):
 	if action == "play": get_tree().change_scene_to_file("res://scenes/SelectVibe.tscn")
@@ -37,4 +40,5 @@ func _process(_delta):
 
 func _on_ready():
 	new_title_image()
+	background_music.play(bgMusic)
 	#$MarginContainer/VBoxContainer/Menu.update_selection()

@@ -1,8 +1,28 @@
-[gd_scene load_steps=6 format=3 uid="uid://k1r1l1d1qrr1"]
+[gd_scene load_steps=18 format=3 uid="uid://k1r1l1d1qrr1"]
 
 [ext_resource type="Texture2D" uid="uid://1vmpowkruim6" path="res://assets/generic-platformer-tiles/generic_platformer_tiles.png" id="1_3mvv6"]
+[ext_resource type="Script" path="res://scenes/ExampleSideScroll.gd" id="1_qaxtc"]
 [ext_resource type="PackedScene" uid="uid://d2dxe6duwx2n4" path="res://scenes/characters/Player2DS.tscn" id="2_0j24u"]
+[ext_resource type="PackedScene" uid="uid://8c4pldm2eesg" path="res://scenes/usable/ShowForVibeCanvas.tscn" id="2_2jjrq"]
+[ext_resource type="Resource" uid="uid://58pkivfuuib" path="res://assets/game2/vibes/classic.tres" id="3_ka6tx"]
 [ext_resource type="PackedScene" uid="uid://dqov77x6i66vu" path="res://scenes/overlays/UI2DS.tscn" id="3_tpiqt"]
+[ext_resource type="Resource" uid="uid://d8larpor2k15" path="res://assets/game2/vibes/spiky.tres" id="4_6lp46"]
+[ext_resource type="Texture2D" uid="uid://cpdiie2xaqlks" path="res://assets/game2/sprites/blood-drop.png" id="5_x1kxg"]
+[ext_resource type="Resource" uid="uid://djjyuvbqjb3ls" path="res://assets/game2/vibes/bouncy.tres" id="6_n43mt"]
+[ext_resource type="Shader" path="res://shaders/BouncyBG.gdshader" id="7_qsg5e"]
+[ext_resource type="Resource" uid="uid://cb876jtcr7hyc" path="res://assets/game2/vibes/squiggly.tres" id="8_xsrjq"]
+[ext_resource type="Shader" path="res://shaders/SquigglyBG.gdshader" id="9_b3ooi"]
+[ext_resource type="Texture2D" uid="uid://cbfrrw8wknxra" path="res://assets/game2/sprites/squiggly-mark.png" id="10_xrxvl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dov8p"]
+shader = ExtResource("7_qsg5e")
+shader_parameter/start_color = Color(0.67451, 0.470588, 0.854902, 1)
+shader_parameter/end_color = Color(0.921569, 0.470588, 0.658824, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6itmr"]
+shader = ExtResource("9_b3ooi")
+shader_parameter/start_color = Color(0.45098, 0.956863, 0.792157, 1)
+shader_parameter/end_color = Color(0.921569, 0.870588, 0.580392, 1)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sxxq5"]
 texture = ExtResource("1_3mvv6")
@@ -1251,6 +1271,86 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_sxxq5")
 
 [node name="ExampleSideScroll" type="Node2D"]
+script = ExtResource("1_qaxtc")
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="ClassicBG" parent="Background" instance=ExtResource("2_2jjrq")]
+layer = -10
+visible = false
+vibes = Array[Resource("res://assets/game2/vibes/Vibe.gd")]([ExtResource("3_ka6tx")])
+
+[node name="NormalBlueBG" type="ColorRect" parent="Background/ClassicBG"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.352941, 0.576471, 0.894118, 1)
+
+[node name="SpikyBG" parent="Background" instance=ExtResource("2_2jjrq")]
+layer = -10
+visible = false
+vibes = Array[Resource("res://assets/game2/vibes/Vibe.gd")]([ExtResource("4_6lp46")])
+
+[node name="NormalBlueBG" type="ColorRect" parent="Background/SpikyBG"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.317647, 0.411765, 0.447059, 1)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Background/SpikyBG"]
+position = Vector2(581, 0)
+amount = 50
+lifetime = 1.5
+texture = ExtResource("5_x1kxg")
+emission_shape = 3
+emission_rect_extents = Vector2(600, 1)
+scale_amount_min = 2.0
+scale_amount_max = 3.0
+color = Color(1, 0.211765, 0.211765, 1)
+
+[node name="BouncyBG" parent="Background" instance=ExtResource("2_2jjrq")]
+layer = -10
+visible = false
+vibes = Array[Resource("res://assets/game2/vibes/Vibe.gd")]([ExtResource("6_n43mt")])
+
+[node name="NormalBlueBG" type="ColorRect" parent="Background/BouncyBG"]
+material = SubResource("ShaderMaterial_dov8p")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.521569, 0.396078, 0.607843, 1)
+
+[node name="SquigglyBG" parent="Background" instance=ExtResource("2_2jjrq")]
+layer = -10
+vibes = Array[Resource("res://assets/game2/vibes/Vibe.gd")]([ExtResource("8_xsrjq")])
+
+[node name="NormalBlueBG" type="ColorRect" parent="Background/SquigglyBG"]
+material = SubResource("ShaderMaterial_6itmr")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.352941, 0.576471, 0.894118, 1)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Background/SquigglyBG"]
+position = Vector2(1162, 308)
+amount = 10
+lifetime = 5.0
+texture = ExtResource("10_xrxvl")
+emission_shape = 3
+emission_rect_extents = Vector2(1, 600)
+gravity = Vector2(-150, 0)
+scale_amount_min = 2.0
+scale_amount_max = 3.0
+color = Color(1, 0.211765, 0.211765, 1)
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_nn0w4")

@@ -1,6 +1,6 @@
 extends Node
 
-@onready var player = $AudioStreamPlayer
+@onready var player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var animator = $AnimationPlayer
 
 func _ready():
@@ -10,6 +10,10 @@ func _process(_delta):
 	pass
 
 func play(sound: AudioStream):
+	# check if we are already playing this
+	if player.stream == sound and player.playing:
+		return
+	
 	# reset everything back to stock
 	player.stop()
 	animator.play("reset")
