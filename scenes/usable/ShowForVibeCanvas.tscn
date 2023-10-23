@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://8c4pldm2eesg"]
+
+[ext_resource type="Script" path="res://scenes/usable/ShowForVibeCanvas.gd" id="1_f8ny3"]
+
+[node name="ShowForVibeCanvas" type="CanvasLayer"]
+script = ExtResource("1_f8ny3")

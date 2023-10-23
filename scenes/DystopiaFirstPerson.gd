@@ -1,5 +1,6 @@
 extends Node3D
 
+@onready var background_music = get_node("/root/BackgroundMusic")
 @onready var game_data: GameData = get_node("/root/GameData")
 @onready var world_environment = $env/WorldEnvironment
 
@@ -11,8 +12,12 @@ var player_in_spawn := true
 var player_has_left_spawn := false
 var total_player_time_in_spawn: float = 0
 
+var bgMusic = preload("res://assets/game2/sound/DystopianBgLoop.ogg")
+
 func _ready():
 	set_fog_type(game_data.fog_type)
+	$AnimationPlayer.play("fade_in")
+	background_music.play(bgMusic)
 
 func _physics_process(delta):
 	if player_in_spawn:
@@ -48,13 +53,31 @@ func set_fog_type(value: int):
 
 func _on_spawn_area_body_entered(body):
 	if body != $Player:
-		pass
+		return
 
 	player_in_spawn = true
 
 func _on_spawn_area_body_exited(body):
 	if body != $Player:
-		pass
+		return
 		
 	player_in_spawn = false
 	player_has_left_spawn = true
+
+func _on_player_body_entered(body):
+	if body != $AlertBot:
+		return
+
+	$AnimationPlayer.play("die")
+
+func move_to_die_scene():
+	get_tree().change_scene_to_file("res://scenes/CloudyFirstPerson.tscn")
+
+func fade_out_bg_music(seconds: float):
+	background_music.fade_out(seconds)
+
+func _on_exit_area_body_entered(body):
+	if body != $Player:
+		return
+
+	get_tree().change_scene_to_file("res://scenes/EuropeanPlumberSiblingSideScroll.tscn")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://di87p1t80gp3y"]
+[gd_scene load_steps=6 format=3 uid="uid://di87p1t80gp3y"]
 
 [ext_resource type="Script" path="res://scenes/characters/PlayerFP.gd" id="1_6ulys"]
 [ext_resource type="PackedScene" uid="uid://climvn0dqrcci" path="res://assets/game2/models/cloak.blend" id="2_rig7e"]
@@ -7,6 +7,10 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mhg1m"]
 height = 1.4
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_xob36"]
+height = 1.23089
+radius = 1.94185
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_6ulys")
@@ -39,5 +43,13 @@ light_cull_mask = 4294967294
 
 [node name="StandingRaycast" type="RayCast3D" parent="."]
 target_position = Vector3(0, 2, 0)
+
+[node name="CollisionArea3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CollisionArea3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.888579, -0.182986)
+shape = SubResource("CylinderShape3D_xob36")
+
+[connection signal="body_entered" from="CollisionArea3D" to="." method="_on_collision_area_3d_body_entered"]
 
 [editable path="Head/Camera3D/CloakViewmodel"]

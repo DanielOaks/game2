@@ -27,3 +27,9 @@ elif {vibe} == 2:
 	eyemonster: Bounce
 	[wait time="1.25"]
 	eyemonster: Hehe
+elif {vibe} == 3:
+	# vibe: Bouncy
+	eyemonster:  
+	eyemonster:  
+	eyemonster: ...
+	eyemonster:  

@@ -21,6 +21,9 @@ func _ready():
 	update_colours()
 
 func _process(_delta):
+	if Input.is_action_just_pressed("restart"):
+		get_tree().change_scene_to_file("res://scenes/MainMenu.tscn")
+
 	if _vibe_locked: return
 
 	if Input.is_action_just_pressed("next_vibe"):
@@ -126,10 +129,10 @@ var stick_sensitivity: float :
 signal vibe_changed(new_vibe: Vibe)
 
 const VIBES: Array[Vibe] = [
-	preload("res://assets/game2/vibes/red.tres"),
-	preload("res://assets/game2/vibes/cool.tres"),
-	preload("res://assets/game2/vibes/kawaii.tres"),
-	preload("res://assets/game2/vibes/warm_ice.tres"),
+	preload("res://assets/game2/vibes/classic.tres"),
+	preload("res://assets/game2/vibes/spiky.tres"),
+	preload("res://assets/game2/vibes/bouncy.tres"),
+	preload("res://assets/game2/vibes/squiggly.tres"),
 ]
 
 var paletteImage: Image = preload("res://assets/game2/red-hood-character-palettes.png").get_image()

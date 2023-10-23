@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbmj8bjoieoq3"]
+
+[ext_resource type="Script" path="res://scenes/usable/ShowForVibe2D.gd" id="1_gmom8"]
+
+[node name="ShowForVibe2D" type="Node2D"]
+script = ExtResource("1_gmom8")
