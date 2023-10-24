@@ -34,6 +34,13 @@ func _ready() -> void:
 	# add to necessary
 	add_to_group('dialogic_dialog_text')
 
+	# TODO: this is the same bug that seemed to affect my @exported variables earlier?
+	# works in the editor but not when exported, hmmmm...
+	print_debug("textbox root is: ", textbox_root)
+	# Here's a hacky workaround that may work for now.
+	if textbox_root == null:
+		textbox_root = self
+
 	bbcode_enabled = true
 	if start_hidden:
 		textbox_root.hide()
