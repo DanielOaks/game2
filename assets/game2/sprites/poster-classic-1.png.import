@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cpdiie2xaqlks"
-path.s3tc="res://.godot/imported/blood-drop.png-1237bdd34d02bcabc76b5ebeab95008c.s3tc.ctex"
+uid="uid://b2gn0pqu6ed4h"
+path.s3tc="res://.godot/imported/poster-classic-1.png-cb24383da647e96343fec82dee2a615c.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/game2/sprites/blood-drop.png"
-dest_files=["res://.godot/imported/blood-drop.png-1237bdd34d02bcabc76b5ebeab95008c.s3tc.ctex"]
+source_file="res://assets/game2/sprites/poster-classic-1.png"
+dest_files=["res://.godot/imported/poster-classic-1.png-cb24383da647e96343fec82dee2a615c.s3tc.ctex"]
 
 [params]
 

@@ -36,4 +36,16 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 446.0
+offset_top = 102.0
+offset_right = 695.0
+offset_bottom = 281.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.415686)
+bbcode_enabled = true
+text = "Note, you can't use this menu with the controller right now. it was too hard to do :(
+
+You can press the [b]start button[/b] to get back to the main menu!"
+
 [connection signal="close_menu" from="MarginContainer/SettingsMenu" to="." method="_on_settings_menu_close_menu"]

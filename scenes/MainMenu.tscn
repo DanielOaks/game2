@@ -94,5 +94,27 @@ centered = false
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 bus = &"UI"
 
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -197.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Label" type="Label" parent="MarginContainer2"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.176471)
+theme_override_font_sizes/font_size = 13
+text = "by Pixienop / Daniel Oaks"
+
 [connection signal="ready" from="." to="." method="_on_ready"]
 [connection signal="actioned" from="MarginContainer/VBoxContainer/Menu" to="." method="_on_menu_actioned"]
