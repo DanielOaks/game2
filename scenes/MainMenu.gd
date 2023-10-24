@@ -22,14 +22,15 @@ func _on_menu_actioned(action: String):
 	if action == "play":
 		game_data.start_playtime()
 		get_tree().change_scene_to_file("res://scenes/SelectVibe.tscn")
-	if action == "play 2d":
+	if action == "test 2d":
 		game_data.start_playtime()
 		get_tree().change_scene_to_file("res://scenes/ExampleSideScroll.tscn")
-	if action == "play 3d":
+	if action == "test 3d":
 		game_data.start_playtime()
 		get_tree().change_scene_to_file("res://scenes/DystopiaFirstPerson.tscn")
 
 	if action == "settings": get_tree().change_scene_to_file("res://scenes/SettingsMenu.tscn")
+	if action == "credits": get_tree().change_scene_to_file("res://scenes/Credits.tscn")
 	
 	if action == "quit": get_tree().quit()
 
@@ -50,3 +51,6 @@ func _on_ready():
 	new_title_image()
 	background_music.play(bgMusic)
 	#$MarginContainer/VBoxContainer/Menu.update_selection()
+	
+	$"MarginContainer/VBoxContainer/Menu/Test 2D".visible = game_data.show_test_buttons
+	$"MarginContainer/VBoxContainer/Menu/Test 3D".visible = game_data.show_test_buttons

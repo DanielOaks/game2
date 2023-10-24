@@ -1,0 +1,96 @@
+[gd_scene format=3 uid="uid://ba3tdm6gd2i1n"]
+
+[node name="Credits" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.356863, 0.0784314, 0.14902, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -10.5
+offset_right = 10.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Credits"
+horizontal_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Thanks to Squiggly River for inviting me to make something for Play//Space, and to Echo and Bounce for hosting.
+
+Here's some more info about what I used to create this game-adjacent thing:"
+fit_content = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/ScrollContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "# Credits
+
+## Tools
+- Godot
+- Aseprite
+- Blender
+- Jummbox
+
+## Title graphics
+- https://www.makewordart.com/
+
+## Assets
+- https://legnops.itch.io/red-hood-character/
+- https://opengameart.org/content/generic-platformer-tiles
+- https://thoseawesomeguys.com/prompts/
+- https://opengameart.org/content/16x16-dark-tech-base-tileset
+- https://freesound.org/people/Kronek9/sounds/702660/
+- Sonniss.com - GDC 2018 - Game Audio Bundle - George Karagioules - The Source. Ambiences from Athens - Athens. Plaka Street. Slow Rain
+
+## Addons
+- Godot State Charts: https://godotengine.org/asset-library/asset/1778
+- Dialogic
+
+## Tutorials
+- Chris' [2D Platformer Quick Start Guide](https://www.youtube.com/watch?v=43c-Sm5GMbc)
+- Godotneers' [State machines and state charts in Godot](https://www.youtube.com/watch?v=E9h9VnbPGuw)
+- picster's [Building a 3D Scene in Godot 4](https://youtu.be/3EMG2jGKkdw)
+- Lukky's [Ultimate First Person Controller Tutorial](https://www.youtube.com/watch?v=xIKErMgJ1Yk)
+"
+fit_content = true

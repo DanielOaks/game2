@@ -9,6 +9,7 @@ extends Panel
 @onready var bg_volume = $VBoxContainer/TabContainer/Audio/VBoxContainer/BGVolume
 @onready var mouse_sensitivity = $VBoxContainer/TabContainer/Controls/VBoxContainer/MouseSensitivity
 @onready var stick_sensitivity = $VBoxContainer/TabContainer/Controls/VBoxContainer/StickSensitivity
+@onready var show_test_buttons = $VBoxContainer/TabContainer/Controls/VBoxContainer/ShowTestButtons
 
 signal close_menu
 
@@ -26,6 +27,8 @@ func _ready():
 	
 	mouse_sensitivity.set_default_value(game_data.mouse_sensitivity)
 	stick_sensitivity.set_default_value(game_data.stick_sensitivity)
+
+	show_test_buttons.set_default_value(game_data.show_test_buttons)
 
 # video
 
@@ -64,3 +67,6 @@ func _on_stick_sensitivity_value_changed(value):
 		return
 
 	game_data.stick_sensitivity = value
+
+func _on_show_test_buttons_toggled(is_button_pressed):
+	game_data.show_test_buttons = is_button_pressed

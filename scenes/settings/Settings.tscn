@@ -40,6 +40,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Video" type="MarginContainer" parent="VBoxContainer/TabContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
@@ -114,7 +115,6 @@ layout_mode = 2
 text = "BG Volume"
 
 [node name="Controls" type="MarginContainer" parent="VBoxContainer/TabContainer"]
-visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
@@ -143,6 +143,16 @@ text = "Stick Sensitivity"
 [node name="HSlider" parent="VBoxContainer/TabContainer/Controls/VBoxContainer/StickSensitivity" index="1"]
 max_value = 300.0
 
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/TabContainer/Controls/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_kafsc")
+
+[node name="ShowTestButtons" parent="VBoxContainer/TabContainer/Controls/VBoxContainer" instance=ExtResource("2_3cg6v")]
+layout_mode = 2
+
+[node name="Label" parent="VBoxContainer/TabContainer/Controls/VBoxContainer/ShowTestButtons" index="0"]
+text = "Show test buttons"
+
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Close" to="." method="_on_close_pressed"]
 [connection signal="toggled" from="VBoxContainer/TabContainer/Video/VBoxContainer/Fullscreen" to="." method="_on_fullscreen_toggled"]
 [connection signal="toggled" from="VBoxContainer/TabContainer/Video/VBoxContainer/VSync" to="." method="_on_vsync_toggled"]
@@ -152,6 +162,7 @@ max_value = 300.0
 [connection signal="value_changed" from="VBoxContainer/TabContainer/Audio/VBoxContainer/BGVolume" to="." method="_on_bg_volume_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/TabContainer/Controls/VBoxContainer/MouseSensitivity" to="." method="_on_mouse_sensitivity_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/TabContainer/Controls/VBoxContainer/StickSensitivity" to="." method="_on_stick_sensitivity_value_changed"]
+[connection signal="toggled" from="VBoxContainer/TabContainer/Controls/VBoxContainer/ShowTestButtons" to="." method="_on_show_test_buttons_toggled"]
 
 [editable path="VBoxContainer/TabContainer/Video/VBoxContainer/Fullscreen"]
 [editable path="VBoxContainer/TabContainer/Video/VBoxContainer/VSync"]
@@ -161,3 +172,4 @@ max_value = 300.0
 [editable path="VBoxContainer/TabContainer/Audio/VBoxContainer/BGVolume"]
 [editable path="VBoxContainer/TabContainer/Controls/VBoxContainer/MouseSensitivity"]
 [editable path="VBoxContainer/TabContainer/Controls/VBoxContainer/StickSensitivity"]
+[editable path="VBoxContainer/TabContainer/Controls/VBoxContainer/ShowTestButtons"]

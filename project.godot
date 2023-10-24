@@ -14,7 +14,12 @@ config/name="Game 2"
 config/version="0.0.1"
 run/main_scene="res://scenes/MainMenu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
+boot_splash/bg_color=Color(0.121569, 0.117647, 0.133333, 1)
+boot_splash/image="res://assets/game2/splash.png"
+boot_splash/fullsize=false
+boot_splash/use_filter=false
 config/icon="res://icon.png"
+boot_splash/minimum_display_time=3500
 
 [audio]
 
@@ -60,6 +65,10 @@ layout/default_style="Default"
 window/size/mode=2
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+
+[editor]
+
+naming/scene_name_casing=1
 
 [editor_plugins]
 

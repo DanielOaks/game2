@@ -7,6 +7,7 @@ var totalPlaytimeInSeconds: float = 0
 var resetGameAfterSeconds: float = 60 * 4
 
 var invertYInput := false
+var show_test_buttons := false
 
 ## shared
 

@@ -1,10 +1,14 @@
 # Credits
 
+## Tools
+- Godot
+- Aseprite
+- Blender
+- Jummbox
 
 ## Title graphics
 
 - https://www.makewordart.com/
-- 
 
 ## Assets
 
