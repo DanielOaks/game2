@@ -17,7 +17,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_unl1d"]
 shader = ExtResource("6_gka3e")
 shader_parameter/start_color = Color(0.67451, 0.470588, 0.854902, 1)
-shader_parameter/end_color = Color(0.921569, 0.470588, 0.658824, 1)
+shader_parameter/end_color = Color(0.941176, 0.552941, 0.705882, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sybyk"]
 shader = ExtResource("8_ltm7q")
@@ -1317,7 +1317,6 @@ color = Color(1, 0.211765, 0.211765, 1)
 
 [node name="BouncyBG" parent="Background" instance=ExtResource("1_2h1ep")]
 layer = -10
-visible = false
 vibes = Array[Resource("res://assets/game2/vibes/Vibe.gd")]([ExtResource("5_ykkyp")])
 
 [node name="NormalBlueBG" type="ColorRect" parent="Background/BouncyBG"]
@@ -1331,6 +1330,7 @@ color = Color(0.521569, 0.396078, 0.607843, 1)
 
 [node name="SquigglyBG" parent="Background" instance=ExtResource("1_2h1ep")]
 layer = -10
+visible = false
 vibes = Array[Resource("res://assets/game2/vibes/Vibe.gd")]([ExtResource("7_jh5ri")])
 
 [node name="NormalBlueBG" type="ColorRect" parent="Background/SquigglyBG"]

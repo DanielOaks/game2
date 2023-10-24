@@ -17,7 +17,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dov8p"]
 shader = ExtResource("7_qsg5e")
 shader_parameter/start_color = Color(0.67451, 0.470588, 0.854902, 1)
-shader_parameter/end_color = Color(0.921569, 0.470588, 0.658824, 1)
+shader_parameter/end_color = Color(0.941176, 0.552941, 0.705882, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6itmr"]
 shader = ExtResource("9_b3ooi")
