@@ -4,6 +4,7 @@ extends Node2D
 @onready var game_data: GameData = get_node("/root/GameData")
 
 var bgMusic = preload("res://assets/freesound/702660__kronek9__emanation.ogg")
+var timeline = preload("res://dialogic/eyemonstervn.dtl")
 
 func _ready():
 	# start fading in
@@ -19,7 +20,7 @@ func _process(_delta):
 func start_dialog():
 	Dialogic.timeline_ended.connect(_on_timeline_ended)
 	Dialogic.VAR.set_variable("vibe", game_data.current_vibe_i)
-	Dialogic.start("res://dialogic/eyemonstervn.dtl")
+	Dialogic.start(timeline)
 
 func _on_timeline_ended():
 	Dialogic.timeline_ended.disconnect(_on_timeline_ended)
