@@ -22,6 +22,9 @@ func start_dialog():
 	Dialogic.VAR.set_variable("vibe", game_data.current_vibe_i)
 	Dialogic.start(timeline)
 
+func _exit_tree():
+	Dialogic.end_timeline()
+
 func _on_timeline_ended():
 	Dialogic.timeline_ended.disconnect(_on_timeline_ended)
 	
