@@ -22,10 +22,9 @@ signal body_entered
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	
 	game_data.connect("vibe_changed", update_vibe)
 	update_vibe(game_data.current_vibe)
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func update_vibe(_new_vibe: Vibe):
 	cloakCurrentMaterial.albedo_color = game_data.cloak_base_colour

@@ -27,6 +27,7 @@ fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0)
 
 [node name="ResetProgress" type="CanvasLayer"]
+layer = 128
 script = ExtResource("1_28e0q")
 
 [node name="ProgressBar" type="TextureProgressBar" parent="."]
@@ -59,6 +60,8 @@ offset_right = 35.0
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.615686)
+theme_override_constants/outline_size = 10
 text = "
 
 

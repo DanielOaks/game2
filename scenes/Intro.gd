@@ -10,6 +10,7 @@ extends Node2D
 @onready var initialSt = Time.get_ticks_msec()
 
 var bgRain = preload("res://assets/sonniss/Athens. Plaka Street. Slow Rain.ogg")
+var bgChill = preload("res://assets/game2/sound/ChillBgLoop.ogg")
 
 func _ready():
 	# setup vibe portrait
@@ -23,8 +24,10 @@ func _ready():
 	# bg music
 	if game_data.current_vibe_i == 2:
 		# bouncy, much less rain
-		pass
 		$StuffInScene/Camera2D/Rain.amount = 24
+		
+		# may sound like a bug but intended :)
+		background_music.play(bgChill)
 	else:
 		background_music.play(bgRain)
 	

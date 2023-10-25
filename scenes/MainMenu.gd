@@ -22,15 +22,16 @@ var bgMusic = preload("res://assets/game2/sound/MainBgLoop.ogg")
 func _on_menu_actioned(action: String):
 	if action == "play":
 		game_data.start_playtime()
-		reset_progress.start_taking_time()
 		get_tree().change_scene_to_file("res://scenes/SelectVibe.tscn")
 	if action == "test 2d":
 		game_data.start_playtime()
 		reset_progress.start_taking_time()
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		get_tree().change_scene_to_file("res://scenes/ExampleSideScroll.tscn")
 	if action == "test 3d":
 		game_data.start_playtime()
 		reset_progress.start_taking_time()
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		get_tree().change_scene_to_file("res://scenes/DystopiaFirstPerson.tscn")
 
 	if action == "settings": get_tree().change_scene_to_file("res://scenes/SettingsMenu.tscn")
@@ -51,6 +52,7 @@ func _process(_delta):
 		new_title_image()
 
 func _on_ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	game_data.end_playtime()
 	new_title_image()
 	background_music.play(bgMusic)
