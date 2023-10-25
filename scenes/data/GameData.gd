@@ -39,9 +39,6 @@ func _process(delta):
 	if Input.is_action_just_pressed("toggle_invert_y"):
 		invertYInput = !invertYInput
 
-	if Input.is_action_just_pressed("restart"):
-		get_tree().change_scene_to_file("res://scenes/MainMenu.tscn")
-
 	if _vibe_locked: return
 
 	if Input.is_action_just_pressed("next_vibe"):

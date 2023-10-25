@@ -1,0 +1,66 @@
+[gd_scene load_steps=6 format=3 uid="uid://b0yedyqwr7iey"]
+
+[ext_resource type="Script" path="res://scenes/overlays/ResetProgress.gd" id="1_28e0q"]
+
+[sub_resource type="Gradient" id="Gradient_csvj2"]
+offsets = PackedFloat32Array(0, 0.920245, 1)
+colors = PackedColorArray(0, 0, 0, 0.709804, 0.187176, 0.187176, 0.187176, 0.905882, 0.0807833, 0.0807833, 0.0807833, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8m8gi"]
+gradient = SubResource("Gradient_csvj2")
+width = 42
+height = 42
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="Gradient" id="Gradient_a341k"]
+offsets = PackedFloat32Array(0, 0.797546, 0.880368)
+colors = PackedColorArray(0.830335, 0.830335, 0.830335, 1, 0.964742, 0.964742, 0.964742, 1, 0.964706, 0.964706, 0.964706, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fgsxn"]
+gradient = SubResource("Gradient_a341k")
+width = 42
+height = 42
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[node name="ResetProgress" type="CanvasLayer"]
+script = ExtResource("1_28e0q")
+
+[node name="ProgressBar" type="TextureProgressBar" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -21.0
+offset_right = 21.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+fill_mode = 4
+texture_under = SubResource("GradientTexture2D_8m8gi")
+texture_progress = SubResource("GradientTexture2D_fgsxn")
+
+[node name="Label" type="Label" parent="ProgressBar"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -11.5
+offset_right = 35.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "
+
+
+resetting"
+horizontal_alignment = 1

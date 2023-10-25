@@ -31,6 +31,7 @@ GameData="*res://scenes/data/GameData.gd"
 Controller="*res://scenes/data/Controller.gd"
 BackgroundMusic="*res://scenes/usable/BackgroundMusic.tscn"
 Dialogic="*res://addons/dialogic/Other/DialogicGameHandler.gd"
+ResetProgress="*res://scenes/overlays/ResetProgress.tscn"
 
 [dialogic]
 
