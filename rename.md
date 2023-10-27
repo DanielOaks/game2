@@ -1,6 +1,11 @@
-# Credits
+# game2
+
+This is an interesting game, made by a Godot newbie, for [Squiggly River](http://squigglyriver.com/)'s Play//Space exhibition.
+
+You can find the builds here: https://pixienop.itch.io/game2
 
 ## Tools
+
 - Godot
 - Aseprite
 - Blender
