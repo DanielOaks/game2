@@ -19,7 +19,7 @@ boot_splash/image="res://assets/game2/splash.png"
 boot_splash/fullsize=false
 boot_splash/use_filter=false
 config/icon="res://icon.png"
-boot_splash/minimum_display_time=3500
+boot_splash/minimum_display_time=2000
 
 [audio]
 

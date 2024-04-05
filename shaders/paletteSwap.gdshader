@@ -15,14 +15,14 @@ vec4 get_replacement(vec4 color)
 	float selectedPaletteY = paletteNumber / float(paletteSize.y) + (1.0 / float(paletteSize.y)) * 0.5;
 	float xMod = 1.0 / float(paletteSize.x);
 	float currentX = xMod * .5;
-	
+
 	for (int i = 0; i < paletteSize.x; i += 1) {
 		if (distance(color, texture(paletteTexture, vec2(currentX, 0.0))) <= precision) {
 			return texture(paletteTexture, vec2(currentX, selectedPaletteY));
 		}
 		currentX += xMod;
 	}
-	
+
 	return color;
 }
 
